@@ -1,4 +1,12 @@
 .App {
   text-align: center;
 }
+.swing-bottom-left-fwd:hover{animation:swing-bottom-left-fwd .4s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes swing-bottom-left-fwd{0%{transform:rotate3d(1,1,0,0deg);transform-origin:0 100%}100%{transform:rotate3d(1,1,0,-180deg);transform-origin:0 100%}}
 
+.rotate-scale-up-ver:hover{animation:rotate-scale-up-ver .85s linear both}
+
+@keyframes rotate-scale-up-ver{0%{transform:scale(1) rotateY(0)}50%{transform:scale(2) rotateY(180deg)}100%{transform:scale(1) rotateY(360deg)}}
+
+.text-pop-up-bottom:hover{animation:text-pop-up-bottom .8s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes text-pop-up-bottom{0%{transform:translateY(0);transform-origin:50% 50%;text-shadow:none}100%{transform:translateY(20px);transform-origin:50% 50%;text-shadow:0 1px 0 #ccc,0 2px 0 #ccc,0 3px 0 #ccc,0 4px 0 #ccc,0 5px 0 #ccc,0 6px 0 #ccc,0 3px 0 #ccc,0 4px 0 #ccc,0 5px 0 #ccc,0 20px 10px rgba(0,0,0,.3)}}

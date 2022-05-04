@@ -15,7 +15,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //connect database => mongoose.connect
-
+mongoose.connect(process.env.DATA_MONGO_URL, (err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log('connected')
+    }
+})
 
 //create middleware zodat enkel ingelogde users de verhalen kunnen zien
 //met webtoken, opslaan in localstorage?

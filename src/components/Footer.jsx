@@ -1,24 +1,23 @@
 import React from 'react'
+import { Col, Container, Image, Row } from 'react-bootstrap'
 import github from "../images/github_icon.png"
 
 function Footer() {
   return (
-    <div className='container-xl d-block w-100 border border-5 border-danger bg-secondary rounded-pill   mx-auto'>
-<div className='row align-items-center justify-content-center'> 
-<div className='col-sm-3'>
-  <h4 className='text-white'>
+    <Container fluid>
+   <Row className=' w-100 border border-5 border-danger align-items-center justify-content-center bg-secondary rounded-pill   mx-auto'>
+       <Col md={3}>
+       <h4 className='text-white'>
          Merritske 2022
          </h4> 
-</div>
-<div className='col-sm-2'>
-<a href='https://github.com/Merritske/eindproject' rel='noreferrer' target="_blank"><img src={github} className=" w-25 m-1 bg-white rounded-circle" alt="githublink" /> </a> 
-</div>
-
-    
-     
-</div>
+   </Col>
+   <Col md={1}  >
+     <a href='https://github.com/Merritske/eindproject' rel='noreferrer' target="_blank"><Image src={github} className=" w-25 m-1 bg-white rounded-circle" alt="githublink" /> </a> 
+   </Col>
+   </Row>
    
-    </div>
+    </Container>
+    
   )
 }
 

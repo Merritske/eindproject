@@ -10,10 +10,10 @@ function Cards({image, title, tekst}) {
 
     const [flipped, setFlipped] = useState(false)
 
-    function flip() {
+    function flip(e) {
       setFlipped(!flipped)
       console.log("flipped")
-  
+
     }
  
 //firebase
@@ -31,26 +31,38 @@ useEffect(()=>{
   }
   getContent()
 },[])
-   console.log(content)
-  return (
-<Container fluid>
 
-<Row xs={1} md={3} className="g-4" >
+
+
+
+//bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
+//knop om aan te melden voor de reis => login vereist
+//meer info
+
+
+  return (
+<Container fluid  >
+
+<Row  md={1}  lg={2} xl={3} >
              {
      content.map((data, index)=>{
        return (
-<Col md={4} className='p-5 h-25 '>
-     <Card id="card" className="bg-dark text-white m-3" onClick={flip} key={index} >
-          <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night"  />
-          <Card.ImgOverlay >
-        
-            <Card.Text id="back" >
+<Col className=' h-25'>
+
+     <Card  id="card" className="bg-dark text-white mx-auto m-3" onMouseEnter={flip} key={index} >
+  
+  <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night"  />
+    
+     { flipped &&   <Card.ImgOverlay >
+      
+            <Card.Text  className='back'>
       {data.tekst}
             </Card.Text>
-          </Card.ImgOverlay>
-              <Card.Title id="cardTitle" className='mt-5 fs-2'>{data.title}</Card.Title>
+          </Card.ImgOverlay>}
+
+             
         </Card>
-        
+      <Card.Title  className='mt-5 fs-2 back'>{data.title}</Card.Title>   
 </Col>
     
      )

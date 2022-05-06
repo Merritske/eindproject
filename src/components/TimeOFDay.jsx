@@ -1,3 +1,5 @@
+import { Container } from "react-bootstrap"
+
 function Time(){
     const hours = new Date().getHours()
     let timeOfDay
@@ -11,9 +13,9 @@ function Time(){
         timeOfDay = "night"
     }
     return(
-        <div > 
+        <Container className="mt-5"> 
             <h2>Good {timeOfDay}!</h2>
-        </div>
+        </Container>
     )
 }
 export default Time

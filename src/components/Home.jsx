@@ -14,7 +14,7 @@ function Home() {
 
 
   return (
-    <Container fluid className=' mt-5 p-5'>
+    <Container fluid className=' mx-auto p-5 mt-5 '>
       <Time />
       <h1 >Welkom username {id} </h1>
 

@@ -16,24 +16,37 @@
  #card{
 object-fit: cover;
   position: relative;
-height: 500px;
-width: 500px;
+height: 400px;
+width: 400px;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 } 
 #card:hover{
     transform: rotateY(180deg);
-    height: 500px;
+    height: 400px;
 }
 #cardImg{
 
   backface-visibility: hidden;
 } 
-.card-img-overlay{
-  height: 500px !important;
-  width: 250px;
+/* .back{
+  display: none;
+  height: 400px !important;
+  min-width: 250px;
+  width: 300px;
   margin-left: auto;
   margin-right: auto;
-
+transform: rotateY(180deg);
+} */
+  .card-img-overlay{
+  height: 400px !important;
+  min-width: 250px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+transform: rotateY(180deg);
+}  
+.modal-content{
+  width: 800px;
 }

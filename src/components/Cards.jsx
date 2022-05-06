@@ -1,9 +1,9 @@
 import { dblClick } from '@testing-library/user-event/dist/click'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Card, CardGroup, Fade, Row, Col } from 'react-bootstrap'
-import flensburg from "../images/avondFlensburg.JPG"
-import Burg from "../images/Burg-Reuland.JPG"
-import db from '../firebase.js'
+
+import { db} from '../firebase'
+import { collection, doc, getDocs } from "firebase/firestore"
 
 
 function Cards({image, title, tekst}) {
@@ -15,22 +15,58 @@ function Cards({image, title, tekst}) {
       console.log("flipped")
   
     }
- console.log(db.collection("reizen")) 
+ 
+//firebase
+const [content, setContent] = useState([])
+const reizen = collection(db, "reizen")
+useEffect(()=>{
+  const getContent = async ()=>{
+    const data = await getDocs(reizen);
+    setContent(data.docs.map((doc)=>(
+        {...doc.data(), id: doc.id}
+    )
 
+    ))  
+   
+  }
+  getContent()
+},[])
+   console.log(content)
   return (
-    <div>
-<Card id="card" className="bg-dark text-white m-3" onClick={flip} >
-          <Card.Img id="cardImg" src={image} alt="Flensburg at night" className='h-25' />
+<Container fluid>
+
+<Row xs={1} md={3} className="g-4" >
+             {
+     content.map((data, index)=>{
+       return (
+<Col md={4} className='p-5 h-25 '>
+     <Card id="card" className="bg-dark text-white m-3" onClick={flip} key={index} >
+          <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night"  />
           <Card.ImgOverlay >
-            <Card.Title >{title}</Card.Title>
+        
             <Card.Text id="back" >
-      {tekst}
+      {data.tekst}
             </Card.Text>
           </Card.ImgOverlay>
+              <Card.Title id="cardTitle" className='mt-5 fs-2'>{data.title}</Card.Title>
         </Card>
+        
+</Col>
+    
+     )
+       })
+   }
+   
+</Row>
+
+  
 
 
 
+    
+
+
+{/* 
 
 
 
@@ -54,7 +90,7 @@ function Cards({image, title, tekst}) {
             <Card.Title >Burg-Reuland</Card.Title>
             <Card.Text id="back" >
               Burg-Reuland is close to the three-country point of Belgium, Luxemburg and Germany. It's the eastern cantons. Visit the ruine in the town.
-              <br />
+        
               Nice for biking and walking.
             </Card.Text>
           </Card.ImgOverlay>
@@ -85,7 +121,7 @@ function Cards({image, title, tekst}) {
  </Card>
       
     </CardGroup>
-
+ */}
 
       {/* <div>
         <div className="row" >
@@ -181,7 +217,7 @@ function Cards({image, title, tekst}) {
 
         </div>
       </div> */}
-    </div>
+  </Container>
   )
 }
 

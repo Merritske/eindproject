@@ -19,6 +19,7 @@ function App() {
       <NavbarComponent/>
 
 <Home/>
+<br/>
 <Reisverslag/>
 <Extras/>
 <Footer/>

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(220,220,220);
 }
 .swing-bottom-left-fwd:hover{animation:swing-bottom-left-fwd .4s cubic-bezier(.25,.46,.45,.94) both}
 @keyframes swing-bottom-left-fwd{0%{transform:rotate3d(1,1,0,0deg);transform-origin:0 100%}100%{transform:rotate3d(1,1,0,-180deg);transform-origin:0 100%}}
@@ -13,19 +14,26 @@
 
 
  #card{
-
+object-fit: cover;
   position: relative;
-  width:20%;
-  height: 20%;
+height: 500px;
+width: 500px;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 } 
 #card:hover{
     transform: rotateY(180deg);
+    height: 500px;
 }
 #cardImg{
 
   backface-visibility: hidden;
 } 
+.card-img-overlay{
+  height: 500px !important;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
 
+}

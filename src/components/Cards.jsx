@@ -49,9 +49,9 @@ useEffect(()=>{
        return (
 <Col className=' h-25'>
 
-     <Card  id="card" className="bg-dark text-white mx-auto m-3" onMouseEnter={flip} key={index} >
+     <Card  id="card" className="bg-dark text-white mx-auto m-3 h-75 " onMouseEnter={flip} key={index} >
   
-  <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night"  />
+  <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night" />
     
      { flipped &&   <Card.ImgOverlay >
       
@@ -60,9 +60,9 @@ useEffect(()=>{
             </Card.Text>
           </Card.ImgOverlay>}
 
-             
+                <Card.Title  className='mt-4 fs-2 back'>{data.title}</Card.Title>  
         </Card>
-      <Card.Title  className='mt-5 fs-2 back'>{data.title}</Card.Title>   
+    
 </Col>
     
      )

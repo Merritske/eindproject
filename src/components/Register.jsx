@@ -21,7 +21,7 @@ function Register() {
   <Container fluid className='p-5 m-5 ' id='register'> 
    <fieldset>
     <legend>Creëer een account</legend>
-<Form>
+<Form action='POST'>
   <Row className="mb-3">
      <Form.Group className="mb-3" controlId="formUsername">
     <Form.Label>Username</Form.Label>

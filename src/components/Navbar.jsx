@@ -33,7 +33,7 @@ function NavbarComponent() {
   
     <Col  md={{span:3, offset:4}} sm={{span:3, offset:4}} >
       <Nav>
-        <Nav.Link href="#">
+        <Nav.Link >
            <Login /> 
         </Nav.Link>
         

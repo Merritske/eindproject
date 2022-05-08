@@ -17,7 +17,7 @@
 
   position: relative;
 height: 400px;
-width: 400px;
+
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -25,6 +25,7 @@ width: 400px;
 #card:hover{
     transform: rotateY(180deg);
     height: 400px;
+    
 }
 #cardImg{
   height: 400px;
@@ -40,15 +41,27 @@ object-fit: cover;
   margin-left: auto;
   margin-right: auto;
 transform: rotateY(180deg);
-} */
-  .card-img-overlay{
+}  */
+.card-img-overlay{
   height: 400px !important;
   min-width: 250px;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
 transform: rotateY(180deg);
-}  
+}   
+#cardTitle{
+  backface-visibility: hidden;
+}
+#cardTitleBack{
+  position: absolute;
+top: 400px;
+width: inherit;
+text-align: center;
+}
 .modal-content{
   width: 800px;
+}
+#register{
+  text-align: start;
 }

@@ -1,4 +1,4 @@
-import { dblClick } from '@testing-library/user-event/dist/click'
+import GoogleMapReact from 'google-map-react'
 import React, { useEffect, useState } from 'react'
 import { Container, Card, CardGroup, Fade, Row, Col } from 'react-bootstrap'
 
@@ -11,11 +11,15 @@ function Cards({image, title, tekst}) {
     const [flipped, setFlipped] = useState(false)
 
     function flip(e) {
-      setFlipped(!flipped)
-      console.log("flipped")
+      setFlipped(true)
 
+    
+     
     }
- 
+ function unflip(e){
+   setFlipped(false)
+   console.log("unflipped")
+ }
 //firebase
 const [content, setContent] = useState([])
 const reizen = collection(db, "reizen")
@@ -25,9 +29,7 @@ useEffect(()=>{
     setContent(data.docs.map((doc)=>(
         {...doc.data(), id: doc.id}
     )
-
     ))  
-   
   }
   getContent()
 },[])
@@ -47,20 +49,21 @@ useEffect(()=>{
              {
      content.map((data, index)=>{
        return (
-<Col className=' h-25'>
+<Col className=' h-25' key={index} onMouseEnter ={(e)=>setFlipped(true)} onMouseLeave={(e)=>setFlipped(false)}>
 
-     <Card  id="card" className="bg-dark text-white mx-auto m-3 h-75 " onMouseEnter={flip} key={index} >
+     <Card  id="card" className="bg-dark text-white mx-auto m-3 h-75 "  >
   
   <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night" />
     
      { flipped &&   <Card.ImgOverlay >
       
-            <Card.Text  className='back'>
+            <Card.Text className='back' >
       {data.tekst}
             </Card.Text>
+            <Card.Title id="cardTitleBack" className='mt-4 fs-2'>{data.title}</Card.Title> 
           </Card.ImgOverlay>}
-
-                <Card.Title  className='mt-4 fs-2 back'>{data.title}</Card.Title>  
+          
+       <Card.Title  id="cardTitle" className='mt-4 fs-2'>{data.title}</Card.Title> 
         </Card>
     
 </Col>
@@ -73,6 +76,19 @@ useEffect(()=>{
 
   
 
+
+
+{/* <GoogleMapReact
+                apiKey={'AIzaSyCSNku3Qktl2r14l-fdckWe2j55KmnKqDs'}
+                defaultCenter={location.center}
+                defaultZoom={location.zoom}
+            >
+                <AnyReactComponent
+                    lat={50.8597991}
+                    lng={4.3369251}
+                    text="Denmark"
+                />
+            </GoogleMapReact> */}
 
 
     

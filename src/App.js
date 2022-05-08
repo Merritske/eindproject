@@ -1,13 +1,17 @@
 import './App.css';
-import Extras from './components/Extras';
-import Reisverslag from './components/Reisverslag';
+import Register from './components/Register';
 import Home from './components/Home'
 
 import NavbarComponent from './components/Navbar';
 import Footer from './components/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 
+//use context of redux
+// fetch("/login")
+// fetch("/register")
+// fetch("/reizen")
 
 function App() {
 
@@ -16,14 +20,19 @@ function App() {
     <div className="App">
 
 
-      <NavbarComponent/>
+     
 
-<Home/>
-<br/>
-<Reisverslag/>
-<Extras/>
+
+
+<BrowserRouter>
+ <NavbarComponent/>
+
+<Routes>
+  <Route path='/' element={<Home/>} />
+  <Route path='/register' element={  <Register/> }/>
+</Routes>
 <Footer/>
-
+</BrowserRouter>
 
 
 

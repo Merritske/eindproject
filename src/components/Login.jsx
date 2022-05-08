@@ -1,8 +1,17 @@
 import React, {useState} from 'react'
 import { Button, Form,  Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 
 export default function Login() {
+
+  fetch("/login")
+  .then(res=>res.json())
+  .then(data=>{
+      console.log(data)
+  })
+
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -44,8 +53,9 @@ export default function Login() {
           </Form>
         </Modal.Body>
         <Modal.Footer> 
-  <h3>No account? <a href="#" onClick={handleClose}> Create an account</a> </h3>
-        
+  <h3>No account? <Link to="/register" onClick={handleClose}>Create an account</Link>
+ </h3>
+
         </Modal.Footer>
       </Modal>
 

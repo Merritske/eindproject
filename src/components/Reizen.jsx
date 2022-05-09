@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Container } from 'react-bootstrap'
-import { Database } from '../context'
+import { Database } from '../context/index'
 
-function Reizen({reis}) {
+function Reizen({}) {
 
 
 

@@ -8,23 +8,21 @@ export default function Login() {
     username: "",
     password: ""
   })
-  function handleLogin(){
-    // fetch("http://localhost:5001/login")
-    // .then(res=>res.json())
-    // .then((data)=>{
-    //   setState(data)
-    // })
-    fetch("http://localhost:5002/login",{
-      method:"POST",
-      body:JSON.stringify({
-        username:"An",
-        password:"12345"
-      })
-    }).then((response)=>response.json())
-    .then(data=>{
-      console.log(data)
+  function handleLogin() {
+  
+    axios.post("/login", {
+      username: state.username,
+      password: state.password
     })
+      .then(res => {
+        console.log(res.data)
+        localStorage.setItem('user', JSON.stringify({
+          username: "root",
+          token: res.data.token
+        }))
+      })
   }
+ 
   //VOORBEELD
   // const formSubmitHandler = (e) => {
   //   e.preventDefault()
@@ -45,14 +43,6 @@ export default function Login() {
   // //PUT (single object)(or PATCH) update data
   // //DELETE delete data
 
-  // function handleSubmit(event) {
-
-  //   fetch('/login', {
-  //     method: 'POST',
-  //  
-  //   event.preventDefault()
-  // }
-
   const handleChange = e => {
     const { name, value } = e.target;
     //    console.log(e.target)
@@ -67,6 +57,10 @@ export default function Login() {
 
   return (
     <div>
+      <Form>
+     
+      
+      </Form>
       <Button className="btn btn-outline-dark border border-5 btn-danger fs-5" type="button" onClick={handleShow}>LOG IN </Button>
 
       <Modal
@@ -88,15 +82,9 @@ export default function Login() {
 
               <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
             </Form.Group>
-            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group> */}
-            <Button variant="primary" type="submit" className="m-3" >
-              Submit
-            </Button>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
+        <button variant="primary" type='button' onClick={()=>{handleLogin();
+          handleClose()}} className="m-3">Submit</button>
+          
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -105,7 +93,6 @@ export default function Login() {
 
         </Modal.Footer>
       </Modal>
-
 
     </div>
   )

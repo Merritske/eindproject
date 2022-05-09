@@ -33,7 +33,7 @@ height: 400px;
 object-fit: cover;
   backface-visibility: hidden;
 } 
-/* .back{
+.back{
   display: none;
   height: 400px !important;
   min-width: 250px;
@@ -41,15 +41,15 @@ object-fit: cover;
   margin-left: auto;
   margin-right: auto;
 transform: rotateY(180deg);
-}  */
-.card-img-overlay{
+}  
+/* .card-img-overlay{
   height: 400px !important;
   min-width: 250px;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
 transform: rotateY(180deg);
-}   
+}    */
 #cardTitle{
   backface-visibility: hidden;
 }

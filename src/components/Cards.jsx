@@ -25,8 +25,19 @@ useEffect(()=>{
   getContent()
 },[])
 
+function handleMouseEnter(e){
+ for(let x = 0; x< content.length ; x++){
+   if(content[x].title === e.target.innerText){
+ let back =  document.getElementsByClassName('back')
+ back[x].style.display = "block"
+  console.log(content[x].title)
+ }
+ 
 
+}
+}
 
+//GEEFT NOG ERROR IVM STYLE !!!!!
 
 //bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
 //knop om aan te melden voor de reis => login vereist
@@ -40,7 +51,7 @@ useEffect(()=>{
              {
      content.map((data, index)=>{
        return (
-<Col className=' h-25' key={index} onMouseEnter ={(e)=>setFlipped(true)} onMouseLeave={(e)=>setFlipped(false)}>
+<Col className=' h-25' key={index} onClick={()=>console.log(index)} onMouseEnter ={(e)=>handleMouseEnter(e)} onMouseLeave={()=>setFlipped(false)}>
 
      <Card  id="card" className="bg-dark text-white mx-auto m-3 h-75 "  >
   

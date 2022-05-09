@@ -18,19 +18,22 @@ setState(prevState=>{
   [name]: type === "checkbox"? checked: value}
 })
 }
-  function handleSubmit(event){
+  function handleSubmit(){
 
     fetch('/register', {
         method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
         body: JSON.stringify(state)
     }
     )
-    .then(res=>res.json())
-    .then((data)=>{
-      console.log(data)
-    })
-    event.preventDefault()
-  }
+    .then(res=>{res.json()
+  console.log(res)    })
+
+    }
+  
+
 
 
 
@@ -85,9 +88,6 @@ setState(prevState=>{
         <option>...</option>
       </Form.Select>
     </Form.Group> */}
-
-  
-
 
  <Form.Group  controlId="formWoonplaats" className="mb-3">
       <Form.Label>Woonplaats</Form.Label>

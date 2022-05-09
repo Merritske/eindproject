@@ -1,22 +1,24 @@
-import React from 'react'
-import { Container, Card, CardGroup, Fade, Row, Col } from 'react-bootstrap'
+import React, { useContext } from 'react'
+import { Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
 import Time from './TimeOFDay'
 
 import Cards from './Cards'
+import { Database } from '../context/index'
 
 
 
 function Home() {
-  let { id } = useParams()
+const user = useContext(Database)
  
+console.log(user)
 
 
   return (
     <Container fluid className=' mx-auto p-5 mt-5 '>
       <Time />
-      <h1 >Welkom username {id} </h1>
+      <h1 >Welkom {user} </h1>
 
       <h4>Bent u aan het wachten om leuke dingen te gaan doen tot de prins op het witte paard langskomt en je meeneemt op avontuur? 
      Voel je dat je lang genoeg gewacht hebt en dat Parijs roept. Maar alleen de wereld gaan ontdekken is toch wat eng... 

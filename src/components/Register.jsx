@@ -1,18 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Form, Button, Container, Col, Row} from "react-bootstrap"
 
-function Register() {
 
-  function handleSubmit(e){
-    e.preventDefault()
-    fetch('/register')
+function Register() {
+const [state, setState] = useState({
+  username: "",
+  password:"",
+  email: "",
+  woonplaats: "",
+  geboortedatum: "",
+  nieuwsbrief: false
+})
+function handleChange(event){
+const {name, value, checked, type} = event.target
+setState(prevState=>{
+  return {...prevState,
+  [name]: type === "checkbox"? checked: value}
+})
+}
+  function handleSubmit(event){
+
+    fetch('/register', {
+        method: 'POST',
+        body: JSON.stringify(state)
+    }
+    )
     .then(res=>res.json())
     .then((data)=>{
       console.log(data)
     })
+    event.preventDefault()
   }
-
-
 
 
 
@@ -21,27 +39,42 @@ function Register() {
   <Container fluid className='p-5 m-5 ' id='register'> 
    <fieldset>
     <legend>Creëer een account</legend>
-<Form action='POST'>
+
+<Form onSubmit={handleSubmit}>
+
   <Row className="mb-3">
+
      <Form.Group className="mb-3" controlId="formUsername">
     <Form.Label>Username</Form.Label>
-    <Form.Control type="text" placeholder="Enter username" />
+    <Form.Control 
+    type="text" 
+    name= "username"
+    value={state.username}
+    onChange= {handleChange}
+    placeholder="Enter username" />
   </Form.Group>
 
     <Form.Group as={Col} controlId="formPassword">
       <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" />
+      <Form.Control 
+      type="password" 
+      name= "password"
+      value={state.password}
+      onChange = {handleChange}
+      placeholder="Password" />
     </Form.Group>
-
 
   </Row>
 
-   
-
-
+  
      <Form.Group as={Col} controlId="formEmail" className="mb-3">
       <Form.Label>Email</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" />
+      <Form.Control 
+      type="email" 
+      name = "email"
+      value = {state.email}
+      onChange = {handleChange}
+      placeholder="Enter email" />
     </Form.Group>
    
 
@@ -58,15 +91,32 @@ function Register() {
 
  <Form.Group  controlId="formWoonplaats" className="mb-3">
       <Form.Label>Woonplaats</Form.Label>
-      <Form.Control type="text" />
+      <Form.Control 
+      type="text"
+      name = "woonplaats"
+      value = {state.woonplaats}
+      onChange={handleChange}
+       />
     </Form.Group>
 
 <Form.Group className="mb-5" controlId="formLeeftijd">
   <Form.Label>Geboortedatum</Form.Label>
-<Form.Control type="date" />
+<Form.Control 
+type="date" 
+name = "geboortedatum"
+value = {state.geboortedatum}
+onChange={handleChange}
+/>
 </Form.Group>
   <Form.Group className="m-5" controlId="formNieuwsbrief">
-    <Form.Check type="checkbox" label="Inschrijven nieuwsbrief" />
+    <Form.Check 
+    type="checkbox" 
+    label="Inschrijven nieuwsbrief"
+    name= "nieuwsbrief"
+    checked= {state.nieuwsbrief}
+    id="nieuwsbrief"
+    onChange = {handleChange}
+    />
   </Form.Group >
 
 

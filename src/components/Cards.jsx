@@ -10,16 +10,7 @@ function Cards({image, title, tekst}) {
 
     const [flipped, setFlipped] = useState(false)
 
-    function flip(e) {
-      setFlipped(true)
 
-    
-     
-    }
- function unflip(e){
-   setFlipped(false)
-   console.log("unflipped")
- }
 //firebase
 const [content, setContent] = useState([])
 const reizen = collection(db, "reizen")

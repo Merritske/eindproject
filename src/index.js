@@ -14,3 +14,6 @@ root.render(
 );
 
 
+//alle mogelijke API's om te gebruiken in webapp
+//https://github.com/public-apis/public-apis 
+

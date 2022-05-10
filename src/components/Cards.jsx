@@ -24,20 +24,30 @@ useEffect(()=>{
   }
   getContent()
 },[])
-
+let tekstCard = document.getElementsByClassName("back")
+let cardTitle = document.getElementById("cardTitle")
+let backTitle = document.getElementById("cardTitleBack")
 function handleMouseEnter(e){
+e.preventDefault()
+ console.log(e.target.nextSibling.innerText)
  for(let x = 0; x< content.length ; x++){
-   if(content[x].title === e.target.innerText){
- let back =  document.getElementsByClassName('back')
- back[x].style.display = "block"
-  console.log(content[x].title)
+
+   if(content[x].title === e.target.nextSibling.innerText){
+console.log('jep')
+tekstCard[x].style.visibility = "visible"
+backTitle.style.transform ="rotateY(180deg) !important"
  }
- 
-
 }
 }
 
-//GEEFT NOG ERROR IVM STYLE !!!!!
+
+function handleMouseLeave(e){
+  for(let x = 0; x< content.length ; x++){
+   if(content[x].title === e.target.nextSibling.innerText){
+  tekstCard[x].style.visibility = "hidden"
+  console.log(backTitle)
+}
+}}
 
 //bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
 //knop om aan te melden voor de reis => login vereist
@@ -51,21 +61,27 @@ function handleMouseEnter(e){
              {
      content.map((data, index)=>{
        return (
-<Col className=' h-25' key={index} onClick={()=>console.log(index)} onMouseEnter ={(e)=>handleMouseEnter(e)} onMouseLeave={()=>setFlipped(false)}>
+<Col className=' h-25' key={index} onClick={()=>console.log(index)}  >
 
-     <Card  id="card" className="bg-dark text-white mx-auto m-3 h-75 "  >
-  
-  <Card.Img id="cardImg" src={data.foto} alt="Flensburg at night" />
-    
-     { flipped &&   <Card.ImgOverlay >
+     <Card  id="card" className="bg-dark text-white mx-auto m-3  h-75 " onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)} >
+
+     <Card.Img id="cardImg" src={data.foto} alt={data.title} />
+
+ 
+   
+ <Card.ImgOverlay  >
       
-            <Card.Text className='back' >
+            <Card.Text  className='back'>
       {data.tekst}
             </Card.Text>
-            <Card.Title id="cardTitleBack" className='mt-4 fs-2'>{data.title}</Card.Title> 
-          </Card.ImgOverlay>}
-          
-       <Card.Title  id="cardTitle" className='mt-4 fs-2'>{data.title}</Card.Title> 
+
+           
+          </Card.ImgOverlay>
+
+     <Card.Title id="cardTitle" className='mt-4 fs-2'>{data.title}</Card.Title>  
+ 
+     
+    
         </Card>
     
 </Col>

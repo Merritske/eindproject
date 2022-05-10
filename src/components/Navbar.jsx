@@ -5,7 +5,14 @@ import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
 
 function NavbarComponent() {
-    const [user, setUser]= useState(true)
+    const [userInlog, setUserInlog]= useState(true)
+
+function handleLogout(){
+  localStorage.clear();
+  window.location.pathname = "/"
+  setUserInlog(false)
+}
+
 
   return (
     <div>
@@ -34,7 +41,9 @@ function NavbarComponent() {
     <Col  md={{span:3, offset:4}} sm={{span:3, offset:4}} >
       <Nav>
         <Nav.Link >
-           <Login /> 
+         { userInlog?   <button variant="primary" type='button' onClick={()=>{handleLogout();
+         }} className="m-3">Logout</button> :
+           <Login /> }
         </Nav.Link>
         
       </Nav>

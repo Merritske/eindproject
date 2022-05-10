@@ -1,27 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 
-export default function Login() {
-  const [state, setState] = useState({
-    username: "",
-    password: ""
-  })
-  function handleLogin() {
-  
-    axios.post("/login", {
-      username: state.username,
-      password: state.password
-    })
-      .then(res => {
-        console.log(res.data)
-        localStorage.setItem('user', JSON.stringify({
-          username: "root",
-          token: res.data.token
-        }))
-      })
-  }
+export default function Login({handleChange, handleLogin}) {
+
+
+
  
   //VOORBEELD
   // const formSubmitHandler = (e) => {
@@ -43,11 +28,7 @@ export default function Login() {
   // //PUT (single object)(or PATCH) update data
   // //DELETE delete data
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    //    console.log(e.target)
-    setState({ ...state, [name]: value });
-  }
+ 
 
   const [show, setShow] = useState(false);
 
@@ -83,7 +64,7 @@ export default function Login() {
               <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
             </Form.Group>
         <button variant="primary" type='button' onClick={()=>{handleLogin();
-          handleClose()}} className="m-3">Submit</button>
+         }} className="m-3">Submit</button>
           
           </Form>
         </Modal.Body>

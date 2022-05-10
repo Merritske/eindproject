@@ -9,6 +9,7 @@ import Login from './components/Login';
 import { Database } from './context/index';
 import { useEffect, useState } from 'react';
 import Reizen from './components/Reizen';
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 
@@ -18,42 +19,56 @@ import Reizen from './components/Reizen';
 // fetch("/reizen")
 
 function App() {
-const [user, setUser] = useState([])
 
-const [reis, setReis]= useState([])
-
-// useEffect(()=>{
-//   fetch("/login", {
-//     method: 'POST',
-//     body: JSON.stringify(user)
-//       }
-//       )
-//         .then(res => res.json())
-//         .then((data) => {
-//           console.log(data)
-//         })
+  const [state, setState] = useState({
+    username: "",
+    password: ""
+  })
 
 
  
+  function handleLogin() {
+  
+    axios.post("/login", {
+      username: state.username,
+      password: state.password
+    })
+      .then(res => {
+        console.log(res.data)
+        localStorage.setItem('user', JSON.stringify({
+          username: state.username,
+          token: res.data.token
+        }))
+      })
+   
+  }
 
- 
-// },[])
+  const handleChange = e => {
+    const { name, value } = e.target;
+    //    console.log(e.target)
+    setState({ ...state, [name]: value });
+  }
 
 
 
   return (
     <div className="App">
-<Database.Provider value={ [user, reis] } > 
+<Database.Provider value={ [user ] }> 
 
 <BrowserRouter >
  <NavbarComponent/>
 
 <Routes>
-  <Route path='/' element={<Home/>} />
-  <Route path='/login' element={<Login />}/>
+<Route path='/' element={<Home/>} />
+    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
   <Route path='/register' element={  <Register/> }/>
-  <Route path='/reizen' element={ <Reizen /> } />
+ <Route path='/reizen' element={
+      <ProtectedRoute userInlog={userInlog} />
+ } />
+
+
 </Routes>
+
 <Footer/>
 </BrowserRouter>
 

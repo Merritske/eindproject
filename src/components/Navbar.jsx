@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import Login from './Login'
-import { useState } from 'react';
 import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
+import { UserProvider } from '../Context'
+import { Navigate } from 'react-router-dom';
 
 function NavbarComponent({handleChange, handleLogin}) {
+  const username = useContext(UserProvider)
     const [userInlog, setUserInlog]= useState(false);
 
 function handleLogout(){
@@ -12,18 +14,25 @@ function handleLogout(){
   window.location.pathname = "/"
   setUserInlog(false)
 } 
+   
 
-useEffect(()=>{
-let userLoggedIn = JSON.parse(localStorage.getItem('user'))
-// if(userLoggedIn){
-//   window.location.pathname = "/"
-// }
-// else 
-if(userLoggedIn.username){
- setUserInlog(true)
+
+ useEffect( ()=>{
+console.log(username)
+
+if(username != ""){
+  setUserInlog(true)
+
+}else if(username == "") {
+setUserInlog(false)
 }
+console.log(userInlog)
+ },[])
 
-},[userInlog])
+
+
+
+
 
   return (
     <div>
@@ -52,7 +61,7 @@ if(userLoggedIn.username){
     <Col  md={{span:3, offset:4}} sm={{span:3, offset:4}} >
       <Nav>
         <Nav.Link >
-         { userInlog?   <button variant="primary" type='button' onClick={()=>{handleLogout();
+         { userInlog ?   <button variant="primary" type='button' onClick={()=>{handleLogout();
          }} className="m-3">Logout</button> :
            <Login handleChange={handleChange} handleLogin={handleLogin} /> }
         </Nav.Link>

@@ -25,7 +25,21 @@ function App() {
     password: ""
   })
 
-
+  useEffect( ()=>{
+  let username =  JSON.parse(localStorage.getItem("user"))
+  console.log(username)
+ if(username != ""){
+ setState({...state,
+  username: username
+ })
+ }else if(username == "") {
+ setState({
+  username: "",
+  password: ""
+ })
+ }
+ console.log(state.username)
+  },[])
  
 const handleLogin =()=> {
   

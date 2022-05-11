@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 
 export default function Login({handleChange , handleLogin }) {
 
-
+ 
 
   const [show, setShow] = useState(false);
 
@@ -40,7 +40,7 @@ export default function Login({handleChange , handleLogin }) {
 
               <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
             </Form.Group>
-        <button variant="primary" type='button' onClick={handleLogin} className="m-3">Submit</button>
+        <button variant="primary" type='button' onClick={()=>{handleLogin();handleClose()}} className="m-3">Submit</button>
           
           </Form>
         </Modal.Body>

@@ -1,26 +1,48 @@
-import React, { useContext } from 'react'
-import { Container } from 'react-bootstrap'
+import React, { useContext, useState, useEffect } from 'react'
+import { Container, Nav } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
 import Time from './TimeOFDay'
-
+import Login from './Login'
 import Cards from './Cards'
 import { UserProvider } from '../Context'
 
 
 
 
-function Home() {
-
-const username = useContext(UserProvider)
+function Home({handleChange, handleLogin}) {
 
 
+const [username] = useContext(UserProvider)
+const [userInlog, setUserInlog]= useState(false);
+
+function handleLogout(){
+localStorage.clear();
+window.location.pathname = "/"
+setUserInlog(false)
+} 
+
+useEffect(()=>{
+if(username.username != ''){
+setUserInlog(true)
+}
+console.log(username.username)
+console.log(userInlog)
+},[username.token])
+console.log(username.token)
 
   return (
     <Container fluid className=' mx-auto p-5 mt-5 '>
+         <Nav>
+        <Nav.Link >
+         { userInlog ?   <button variant="primary" type='button' onClick={()=>{handleLogout()}} className="m-3">Logout</button> :
+           <Login handleChange={handleChange} handleLogin={handleLogin} /> }
+        </Nav.Link>
+        
+      </Nav>
       <Time />
 
-      <h1 >Welkom {username}</h1>
+      <h1 >Welkom {username.username}</h1>
 
    
 

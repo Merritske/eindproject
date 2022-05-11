@@ -1,37 +1,14 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useContext, useEffect,  useState } from 'react'
 import Login from './Login'
 import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
-import { UserProvider } from '../Context'
+
 import { Navigate } from 'react-router-dom';
+import { UserProvider } from '../Context';
 
-function NavbarComponent({handleChange, handleLogin}) {
-  const username = useContext(UserProvider)
-    const [userInlog, setUserInlog]= useState(false);
+function NavbarComponent() {
 
-function handleLogout(){
-  localStorage.clear();
-  window.location.pathname = "/"
-  setUserInlog(false)
-} 
-   
-
-
- useEffect( ()=>{
-console.log(username)
-
-if(username != ""){
-  setUserInlog(true)
-
-}else if(username == "") {
-setUserInlog(false)
-}
-console.log(userInlog)
- },[])
-
-
-
-
+ 
 
 
   return (
@@ -42,7 +19,7 @@ console.log(userInlog)
   <Navbar bg="secondary" variant="secondary" fixed="top" >
  
    <Col md={1}    >
-      <Navbar.Brand href="#home" > 
+      <Navbar.Brand href="/" > 
       
         <img
           alt="logo"
@@ -52,23 +29,12 @@ console.log(userInlog)
           className=" rounded"
         />{' '} 
          </Navbar.Brand>   </Col>
-         <Col md={{span:5, offset:0}} sm={{span:3, offset:1}}>
+         <Col md={8}>
          <Navbar.Text className='text-white fs-1 '>
          Girls just want to have fun! 
      </Navbar.Text>
          </Col>
   
-    <Col  md={{span:3, offset:4}} sm={{span:3, offset:4}} >
-      <Nav>
-        <Nav.Link >
-         { userInlog ?   <button variant="primary" type='button' onClick={()=>{handleLogout();
-         }} className="m-3">Logout</button> :
-           <Login handleChange={handleChange} handleLogin={handleLogin} /> }
-        </Nav.Link>
-        
-      </Nav>
-
-    </Col>
    
    </Navbar>
 </Row>

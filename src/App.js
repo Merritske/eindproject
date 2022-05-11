@@ -21,28 +21,26 @@ import { UserProvider } from './Context';
 function App() {
 
   const [state, setState] = useState({
-    username: "",
-    password: ""
+    username:"",
+    password:""
   })
+   
+useEffect(()=>{
+    let user =  JSON.parse(localStorage.getItem("user")) 
+     console.log(user)
+  if(user !== null && user !== ""){
+    setState({...state,
+      username: user.username
+     })
+    }else if(user === "" || user === null) {
+    console.log("not logged in")
+      } 
+     
+},[])
 
-  useEffect( ()=>{
-  let username =  JSON.parse(localStorage.getItem("user"))
-  console.log(username)
- if(username != ""){
- setState({...state,
-  username: username
- })
- }else if(username == "") {
- setState({
-  username: "",
-  password: ""
- })
- }
- console.log(state.username)
-  },[])
- 
-const handleLogin =()=> {
-  
+
+const handleLogin = ()=> {
+
     axios.post("http://localhost:5001/login", {
       username: state.username,
       password: state.password
@@ -54,32 +52,32 @@ const handleLogin =()=> {
           token: res.data.token
         }))
       })
-   console.log(state)
   }
-
+  console.log(state.username)
   const handleChange = e => {
+    e.preventDefault()
     const { name, value } = e.target;
    console.log(e.target)
     setState({ ...state, [name]: value });
   
   }
-
+  
 
 //https://www.freecodecamp.org/news/react-context-for-beginners/
   return (
     <div className="App">
 
-<UserProvider.Provider value={state.username} >
+<UserProvider.Provider value={[state, ]} >
 <BrowserRouter >
- <NavbarComponent handleChange={handleChange} handleLogin={handleLogin}  />
+ <NavbarComponent   />
 
 <Routes>
-<Route path='/' element={<Home  />} />
-    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
+<Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} />} />
+    <Route path='/login' element={<Login />}/>
   <Route path='/register' element={  <Register/> }/>
  <Route path='/reizen' element={
       // <ProtectedRoute userInlog={state} />
-      <Reizen/>
+      <Reizen />
  } />
 
 

@@ -6,7 +6,7 @@ import { db} from '../firebase'
 import { collection, doc, getDocs } from "firebase/firestore"
 
 
-function Cards({image, title, tekst}) {
+function Cards() {
 
     const [flipped, setFlipped] = useState(false)
 
@@ -24,9 +24,11 @@ useEffect(()=>{
   }
   getContent()
 },[])
+
+
 let tekstCard = document.getElementsByClassName("back")
-let cardTitle = document.getElementById("cardTitle")
-let backTitle = document.getElementById("cardTitleBack")
+let cardTitle = document.querySelectorAll("#cardTitle")
+
 function handleMouseEnter(e){
 e.preventDefault()
  console.log(e.target.nextSibling.innerText)
@@ -34,8 +36,9 @@ e.preventDefault()
 
    if(content[x].title === e.target.nextSibling.innerText){
 console.log('jep')
+console.log(cardTitle[2].innerText)
 tekstCard[x].style.visibility = "visible"
-backTitle.style.transform ="rotateY(180deg) !important"
+cardTitle.style.transform ="rotateY(180deg) !important"  
  }
 }
 }
@@ -43,9 +46,10 @@ backTitle.style.transform ="rotateY(180deg) !important"
 
 function handleMouseLeave(e){
   for(let x = 0; x< content.length ; x++){
+    console.log(e.target.nextSibling.innerText)
    if(content[x].title === e.target.nextSibling.innerText){
   tekstCard[x].style.visibility = "hidden"
-  console.log(backTitle)
+
 }
 }}
 
@@ -63,13 +67,13 @@ function handleMouseLeave(e){
        return (
 <Col className=' h-25' key={index} onClick={()=>console.log(index)}  >
 
-     <Card  id="card" className="bg-dark text-white mx-auto m-3  h-75 " onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)} >
+     <Card  id="card" className="bg-dark text-white mx-auto m-3  h-75 "  >
 
      <Card.Img id="cardImg" src={data.foto} alt={data.title} />
 
  
    
- <Card.ImgOverlay  >
+ <Card.ImgOverlay  onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)}>
       
             <Card.Text  className='back'>
       {data.tekst}

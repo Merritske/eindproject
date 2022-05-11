@@ -7,17 +7,17 @@ function Time(){
     const hours = new Date().getHours()
     let timeOfDay
     if(hours <12){
-        timeOfDay = "morning"
+        timeOfDay = "morgen"
     }else if(hours >= 12 && hours < 17){
-        timeOfDay = "afternoon"
+        timeOfDay = "middag"
     }else if(hours>=17 && hours < 20){
-        timeOfDay = "evening"
+        timeOfDay = "avond"
     }else{
-        timeOfDay = "night"
+        timeOfDay = "nacht"
     }
     return(
         <Container className="mt-5"> 
-            <h2>Good {timeOfDay}!</h2>
+            <h2>Goede {timeOfDay}!</h2>
         </Container>
     )
 }

@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Login from './Login'
 import { useState } from 'react';
 import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
 
-function NavbarComponent() {
-    const [userInlog, setUserInlog]= useState(true)
+function NavbarComponent({handleChange, handleLogin}) {
+    const [userInlog, setUserInlog]= useState(false);
 
 function handleLogout(){
   localStorage.clear();
   window.location.pathname = "/"
   setUserInlog(false)
+} 
+
+useEffect(()=>{
+let userLoggedIn = JSON.parse(localStorage.getItem('user'))
+// if(userLoggedIn){
+//   window.location.pathname = "/"
+// }
+// else 
+if(userLoggedIn.username){
+ setUserInlog(true)
 }
 
+},[userInlog])
 
   return (
     <div>
@@ -43,7 +54,7 @@ function handleLogout(){
         <Nav.Link >
          { userInlog?   <button variant="primary" type='button' onClick={()=>{handleLogout();
          }} className="m-3">Logout</button> :
-           <Login /> }
+           <Login handleChange={handleChange} handleLogin={handleLogin} /> }
         </Nav.Link>
         
       </Nav>

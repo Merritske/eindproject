@@ -1,15 +1,15 @@
 import './App.css';
 import Register from './components/Register';
 import Home from './components/Home'
-
+import axios from 'axios'
 import NavbarComponent from './components/Navbar';
 import Footer from './components/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
-import { Database } from './context/index';
 import { useEffect, useState } from 'react';
 import Reizen from './components/Reizen';
 import ProtectedRoute from './components/ProtectedRoute';
+import { UserProvider } from './Context';
 
 
 
@@ -27,9 +27,9 @@ function App() {
 
 
  
-  function handleLogin() {
+const handleLogin =()=> {
   
-    axios.post("/login", {
+    axios.post("http://localhost:5001/login", {
       username: state.username,
       password: state.password
     })
@@ -40,30 +40,32 @@ function App() {
           token: res.data.token
         }))
       })
-   
+   console.log(state)
   }
 
   const handleChange = e => {
     const { name, value } = e.target;
-    //    console.log(e.target)
+   console.log(e.target)
     setState({ ...state, [name]: value });
+  
   }
 
 
-
+//https://www.freecodecamp.org/news/react-context-for-beginners/
   return (
     <div className="App">
-<Database.Provider value={ [user ] }> 
 
+<UserProvider.Provider value={state.username} >
 <BrowserRouter >
- <NavbarComponent/>
+ <NavbarComponent handleChange={handleChange} handleLogin={handleLogin}  />
 
 <Routes>
-<Route path='/' element={<Home/>} />
+<Route path='/' element={<Home  />} />
     <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
   <Route path='/register' element={  <Register/> }/>
  <Route path='/reizen' element={
-      <ProtectedRoute userInlog={userInlog} />
+      // <ProtectedRoute userInlog={state} />
+      <Reizen/>
  } />
 
 
@@ -72,10 +74,7 @@ function App() {
 <Footer/>
 </BrowserRouter>
 
-
-
-
-    </Database.Provider> 
+</UserProvider.Provider>
        </div>
   );
 }

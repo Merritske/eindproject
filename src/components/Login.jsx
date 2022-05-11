@@ -1,34 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-
-export default function Login({handleChange, handleLogin}) {
 
 
+export default function Login({handleChange , handleLogin }) {
 
- 
-  //VOORBEELD
-  // const formSubmitHandler = (e) => {
-  //   e.preventDefault()
-  //   console.log(formData)
-  //   //send data to server here
-  //   //application/json; charset=UTF-8
-  //   fetch("http://localhost:5000/db", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json; charset=UTF-8"
-  //     },
-  //     body: JSON.stringify(formData)
-  //   }
-  //   )
-  // }
-  // //GET retrieve data
-  // //POST create data
-  // //PUT (single object)(or PATCH) update data
-  // //DELETE delete data
 
- 
 
   const [show, setShow] = useState(false);
 
@@ -63,8 +40,7 @@ export default function Login({handleChange, handleLogin}) {
 
               <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
             </Form.Group>
-        <button variant="primary" type='button' onClick={()=>{handleLogin();
-         }} className="m-3">Submit</button>
+        <button variant="primary" type='button' onClick={handleLogin} className="m-3">Submit</button>
           
           </Form>
         </Modal.Body>

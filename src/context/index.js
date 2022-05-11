@@ -1,3 +1,5 @@
-import { createContext } from "react";
+import { createContext, useContext, useReducer } from "react";
 
-export const Database = createContext();
+export const UserProvider = createContext();
+
+

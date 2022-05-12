@@ -1,11 +1,18 @@
 import React, {useContext} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { UserProvider } from '../Context';
-import Home from './Home';
+import { UserProvider } from '../context';
+import Home from '../pages/Home';
+import Inschrijven from '../pages/Inschrijven';
 
 function Reizen() {
 
-    const username = useContext(UserProvider)
+    const [user, content ] = useContext(UserProvider)
+console.log(content[0])
+//loop over alle content, als content id overeenkomt met de aangeklikte reis => extra info laten zien
+//extra info axios.get("/reizen/id")
+//content[0].id = naam van de reis
+//extra info = datums, uitleg over de reis, inschrijvingen deelnemers
+//uit mongoDB halen
 
   return (
  <Container className='mt-5'>
@@ -27,11 +34,12 @@ function Reizen() {
     </li>
 </ul>
 </Col> 
+
      </Row>
 
 
 
-
+<Inschrijven/>
 
 
 

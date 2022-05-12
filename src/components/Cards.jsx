@@ -1,61 +1,48 @@
 import GoogleMapReact from 'google-map-react'
-import React, { useEffect, useState } from 'react'
-import { Container, Card, CardGroup, Fade, Row, Col } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Container, Card, CardGroup, Fade, Row, Col, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { FotoProvider, UserProvider } from '../context'
+import Inschrijven from '../pages/Inschrijven'
 
-import { db} from '../firebase'
-import { collection, doc, getDocs } from "firebase/firestore"
+
 
 
 function Cards() {
+const [state,content] = useContext(UserProvider)
+    const [flipped, setFlipped] = useState(true)
 
-    const [flipped, setFlipped] = useState(false)
-
-
-//firebase
-const [content, setContent] = useState([])
-const reizen = collection(db, "reizen")
-useEffect(()=>{
-  const getContent = async ()=>{
-    const data = await getDocs(reizen);
-    setContent(data.docs.map((doc)=>(
-        {...doc.data(), id: doc.id}
-    )
-    ))  
-  }
-  getContent()
-},[])
+    console.log(state)
 
 
 let tekstCard = document.getElementsByClassName("back")
-let cardTitle = document.querySelectorAll("#cardTitle")
+let footer = document.querySelectorAll("#footer")
 
 function handleMouseEnter(e){
+  setFlipped(true)
 e.preventDefault()
- console.log(e.target.nextSibling.innerText)
+ console.log(footer)
  for(let x = 0; x< content.length ; x++){
-
-   if(content[x].title === e.target.nextSibling.innerText){
+   if(content[x].title === e.target.nextSibling.firstChild.innerText){
 console.log('jep')
-console.log(cardTitle[2].innerText)
-tekstCard[x].style.visibility = "visible"
-cardTitle.style.transform ="rotateY(180deg) !important"  
+
+tekstCard[x].style.visibility = "visible !important"
+footer[x].style.transform ="rotateY(180deg)" 
  }
 }
 }
-
-
 function handleMouseLeave(e){
   for(let x = 0; x< content.length ; x++){
-    console.log(e.target.nextSibling.innerText)
-   if(content[x].title === e.target.nextSibling.innerText){
+    footer[x].style.transform ="rotateY(180deg)" 
+
   tekstCard[x].style.visibility = "hidden"
 
-}
 }}
 
 //bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
 //knop om aan te melden voor de reis => login vereist
 //meer info
+
 
 
   return (
@@ -67,14 +54,14 @@ function handleMouseLeave(e){
        return (
 <Col className=' h-25' key={index} onClick={()=>console.log(index)}  >
 
-     <Card  id="card" className="bg-dark text-white mx-auto m-3  h-75 "  >
+     <Card  id="card" className="bg-dark text-white mx-auto mt-3  h-50 "   onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)} >
 
-     <Card.Img id="cardImg" src={data.foto} alt={data.title} />
+     <Card.Img id="cardImg" src={data.foto} alt={data.title}  />
 
  
    
- <Card.ImgOverlay  onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)}>
-      
+ <Card.ImgOverlay  >
+   
             <Card.Text  className='back'>
       {data.tekst}
             </Card.Text>
@@ -82,12 +69,24 @@ function handleMouseLeave(e){
            
           </Card.ImgOverlay>
 
-     <Card.Title id="cardTitle" className='mt-4 fs-2'>{data.title}</Card.Title>  
+
+
+
+         <div className='bg-dark' id="footer">
+          <Card.Title id="cardTitle" className='mt-3 fs-2 text-white'>{data.title}</Card.Title>  
  
-     
-    
+     <Button className='m-3'href="/reizen"  onClick={()=>console.log(index)}>
+        INFO
+   
+    </Button>
+
+        </div>
+ 
+
         </Card>
-    
+      
+       
+     
 </Col>
     
      )

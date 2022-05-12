@@ -2,10 +2,10 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Container, Nav } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
-import Time from './TimeOFDay'
-import Login from './Login'
-import Cards from './Cards'
-import { UserProvider } from '../Context'
+import Time from '../components/TimeOFDay'
+import Login from '../components/Login'
+import Cards from '../components/Cards'
+import { UserProvider } from '../context'
 
 
 
@@ -29,7 +29,7 @@ setUserInlog(true)
 console.log(username.username)
 console.log(userInlog)
 },[username.token])
-console.log(username.token)
+
 
   return (
     <Container fluid className=' mx-auto p-5 mt-5 '>

@@ -4,7 +4,7 @@ import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
 
 import { Navigate } from 'react-router-dom';
-import { UserProvider } from '../Context';
+import { UserProvider } from '../context';
 
 function NavbarComponent() {
 

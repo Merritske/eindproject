@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Form, Button, Container, Col, Row} from "react-bootstrap"
 
 
-function Register() {
+function Register({handleLogin}) {
 const [state, setState] = useState({
   username: "",
   password:"",
@@ -12,18 +12,21 @@ const [state, setState] = useState({
   nieuwsbrief: false
 })
 function handleChange(event){
+  console.log(event.target)
 const {name, value, checked, type} = event.target
 setState(prevState=>{
   return {...prevState,
   [name]: type === "checkbox"? checked: value}
 })
-}
-  function handleSubmit(){
 
+}
+  function handleSubmit(e){
+    e.preventDefault()
+console.log(state)
     fetch('/register', {
         method: 'POST',
         headers: {
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json' 
         },
         body: JSON.stringify(state)
     }
@@ -43,7 +46,7 @@ setState(prevState=>{
    <fieldset>
     <legend>Creëer een account</legend>
 
-<Form onSubmit={handleSubmit}>
+<Form method='POST' action='/register' onSubmit={handleSubmit}>
 
   <Row className="mb-3">
 
@@ -122,7 +125,9 @@ onChange={handleChange}
 
 
 
-  <Button variant="primary" type="submit" onClick={handleSubmit}>
+  <Button variant="primary" type="submit" onClick={()=>{
+    handleSubmit() ; handleLogin()
+  } }>
     Creëer account
   </Button>
 </Form>

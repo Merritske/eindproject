@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
+import { Button, Container, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 
@@ -7,21 +7,36 @@ export default function Login({handleChange , handleLogin }) {
 
  
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
 
   return (
-    <div>
-      <Form>
-     
-      
-      </Form>
-      <Button className="btn btn-outline-dark border border-5 btn-danger fs-5" type="button" onClick={handleShow}>LOG IN </Button>
+    <Container fluid className="mt-5" >
+ 
+  
+   
+          <h2 className="p-5 mt-5">Login</h2>
+    
+          <Form onSubmit={handleLogin}>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
 
-      <Modal
+              <Form.Control type="text" placeholder="Enter username" name="username" onChange={handleChange} autoFocus />
+
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+
+              <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
+            </Form.Group>
+        <button variant="primary" type='button' onClick={handleLogin}  className="m-3">
+        <Link to="/" > Submit </Link>
+          </button>
+          
+          </Form>
+        
+          <h3>No account? <Link to="/register" >Create an account</Link>
+          </h3>
+
+    
+
+      {/* <Modal
         show={show}
         onHide={handleClose}
 
@@ -49,8 +64,8 @@ export default function Login({handleChange , handleLogin }) {
           </h3>
 
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
 
-    </div>
+    </Container>
   )
 }

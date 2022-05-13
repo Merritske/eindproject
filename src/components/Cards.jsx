@@ -2,104 +2,114 @@ import GoogleMapReact from 'google-map-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Container, Card, CardGroup, Fade, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { FotoProvider, UserProvider } from '../context'
+import { FotoProvider, UserProvider } from '../Context'
 import Inschrijven from '../pages/Inschrijven'
 
 
 
 
 function Cards() {
-const [state,content] = useContext(UserProvider)
-    const [flipped, setFlipped] = useState(true)
+  const [state, content] = useContext(UserProvider)
+  const [flipped, setFlipped] = useState(true)
 
-    console.log(state)
+  console.log(content)
 
 
-let tekstCard = document.getElementsByClassName("back")
-let footer = document.querySelectorAll("#footer")
+  let tekstCard = document.getElementsByClassName("back")
+  let footer = document.querySelectorAll("#cardTitle")
+  console.log(footer)
+  function handleMouseEnter(e) {
+    setFlipped(true)
+    e.preventDefault()
+   
+    console.log(e.target.lastChild.lastChild.firstChild.innerText)
+    for (let x = 0; x < content.length; x++) {
+ console.log(content[x].title)
+      if (content[x].title === e.target.lastChild.lastChild.firstChild.innerText) {
+      //  console.log(footer[x]) GEEFT UNDEFINED
 
-function handleMouseEnter(e){
-  setFlipped(true)
-e.preventDefault()
- console.log(footer)
- for(let x = 0; x< content.length ; x++){
-   if(content[x].title === e.target.nextSibling.firstChild.innerText){
-console.log('jep')
 
-tekstCard[x].style.visibility = "visible !important"
-footer[x].style.transform ="rotateY(180deg)" 
- }
-}
-}
-function handleMouseLeave(e){
-  for(let x = 0; x< content.length ; x++){
-    footer[x].style.transform ="rotateY(180deg)" 
+      //  footer[x].style.transform = "rotateY(180deg)!important"
+      }
+    }
+  }
+  function handleMouseLeave(e) {
+    for (let x = 0; x < content.length; x++) {
+     // footer[x].style.transform = "rotateY(0deg)"
 
-  tekstCard[x].style.visibility = "hidden"
+      setFlipped(false)
 
-}}
+    }
+  }
+  console.log(flipped)
+  //bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
+  //knop om aan te melden voor de reis => login vereist
+  //meer info
 
-//bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
-//knop om aan te melden voor de reis => login vereist
-//meer info
 
 
 
   return (
-<Container fluid  >
+    <Container fluid  >
 
-<Row  md={1}  lg={2} xl={3} >
-             {
-     content.map((data, index)=>{
-       return (
-<Col className=' h-25' key={index} onClick={()=>console.log(index)}  >
+      <Row md={1} lg={2} xl={3} >
+        {
+          content.map((data, index) => {
+            return (
+              <Col className=' h-25' key={index} onClick={() => console.log(index)} onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
 
-     <Card  id="card" className="bg-dark text-white mx-auto mt-3  h-50 "   onMouseEnter={(e)=>handleMouseEnter(e)} onMouseLeave={(e)=>handleMouseLeave(e)} >
+                <Card id="card" className="bg-dark text-white mx-auto mt-3  h-50 "    >
 
-     <Card.Img id="cardImg" src={data.foto} alt={data.title}  />
+                  <Card.Img id="cardImg" src={data.foto} alt={data.title} />
 
- 
-   
- <Card.ImgOverlay  >
-   
-            <Card.Text  className='back'>
-      {data.tekst}
-            </Card.Text>
+
+
+               <Card.ImgOverlay  >
+
+                    <Card.Text className='back'>
+                      {data.tekst}
+                    </Card.Text>
+
+
+                  </Card.ImgOverlay>
 
            
-          </Card.ImgOverlay>
 
 
-
-
-         <div className='bg-dark' id="footer">
-          <Card.Title id="cardTitle" className='mt-3 fs-2 text-white'>{data.title}</Card.Title>  
- 
-     <Button className='m-3'href="/reizen"  onClick={()=>console.log(index)}>
-        INFO
-   
-    </Button>
-
-        </div>
- 
-
-        </Card>
-      
-       
-     
-</Col>
-    
-     )
-       })
-   }
-   
-</Row>
-
+                  <div className='bg-dark' id="footer">
+                    <Card.Title id="cardTitle" className='mt-3 fs-2 text-white'>{data.title}</Card.Title>
+{
+  state.username != "" ? 
   
+  <Button className='m-3' href={`/reizen/${data.title}`}>   INFO  </Button> :
+  <Button className='m-3' href={"/login"} onClick={()=>{ alert("log in of creëer een account om meer info over deze trip te bekijken")}}  >   INFO  </Button> 
+
+}
+               
+                   
+
+                  
+
+                  </div>
+
+
+                </Card>
 
 
 
-{/* <GoogleMapReact
+              </Col>
+
+            )
+          })
+        }
+
+      </Row>
+
+
+
+
+
+      {/* <GoogleMapReact
                 apiKey={'AIzaSyCSNku3Qktl2r14l-fdckWe2j55KmnKqDs'}
                 defaultCenter={location.center}
                 defaultZoom={location.zoom}
@@ -112,10 +122,10 @@ function handleMouseLeave(e){
             </GoogleMapReact> */}
 
 
-    
 
 
-{/* 
+
+      {/* 
 
 
 
@@ -266,7 +276,7 @@ function handleMouseLeave(e){
 
         </div>
       </div> */}
-  </Container>
+    </Container>
   )
 }
 

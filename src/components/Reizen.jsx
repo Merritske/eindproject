@@ -1,11 +1,13 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { UserProvider } from '../context';
+import { useParams } from 'react-router-dom';
+
+import { UserProvider } from '../Context';
 import Home from '../pages/Home';
 import Inschrijven from '../pages/Inschrijven';
 
 function Reizen() {
-
+let { trip } = useParams()
     const [user, content ] = useContext(UserProvider)
 console.log(content[0])
 //loop over alle content, als content id overeenkomt met de aangeklikte reis => extra info laten zien
@@ -14,14 +16,29 @@ console.log(content[0])
 //extra info = datums, uitleg over de reis, inschrijvingen deelnemers
 //uit mongoDB halen
 
+console.log(trip)
+const [reis, setReis] = useState([])
+
+useEffect(()=>{
+for(let i =0; i< content.length ;i++){
+    if(content[i].id === trip){
+setReis(content[i])
+    }
+}
+})
+
+
+
   return (
  <Container className='mt-5'>
   
-     <Row className='mt-5'>
-         
-         <h1 className='mt-5'>naam van de reis</h1>
+
+
+          <Row className='mt-5'  >
+
+ <h1 className='mt-5'>{reis.id}</h1>
      <Col>
-<p>uitleg over de reis/planning</p>
+<p>{reis.tekst}</p>
 </Col>   
 <Col>
 <h3> beschikbare datums om in te schrijven</h3>
@@ -35,11 +52,17 @@ console.log(content[0])
 </ul>
 </Col> 
 
+
+<Inschrijven/>
      </Row>
 
 
+   
 
-<Inschrijven/>
+     
+
+
+
 
 
 

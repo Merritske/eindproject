@@ -9,7 +9,7 @@ import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import Reizen from './components/Reizen';
 import ProtectedRoute from './components/ProtectedRoute';
-import { FotoProvider, UserProvider } from './context';
+import { FotoProvider, UserProvider } from './Context';
 import { db} from './firebase'
 import { collection, doc, getDocs } from "firebase/firestore"
 
@@ -50,11 +50,11 @@ useEffect(()=>{
       getContent()   
 },[])
 
-console.log(content)
+
 
 const handleLogin = ()=> {
 
-    axios.post("http://localhost:5001/login", {
+    axios.post("/login", {
       username: state.username,
       password: state.password
     })
@@ -78,6 +78,8 @@ const handleLogin = ()=> {
 
 
 
+  //https://v5.reactrouter.com/web/example/url-params
+
 //https://www.freecodecamp.org/news/react-context-for-beginners/
   return (
     <div className="App">
@@ -88,12 +90,12 @@ const handleLogin = ()=> {
 
 <Routes>
 
-    <Route path='/login' element={<Login />}/>
+    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin}/>}/>
   <Route path='/register' element={  <Register handleLogin={handleLogin} /> }/>
 
-   <Route path='/reizen' element={
+   <Route path={`/reizen/:trip`} element={
       // <ProtectedRoute userInlog={state} />
-      <Reizen />
+      <Reizen  />
  } />
 <Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} />} />
 

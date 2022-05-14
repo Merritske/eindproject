@@ -9,7 +9,7 @@ import Inschrijven from '../pages/Inschrijven';
 
 function Reizen() {
 let { trip } = useParams()
-    const [user, content ] = useContext(UserProvider)
+    const [user, content, loggedIn ] = useContext(UserProvider)
 console.log(content[0])
 //loop over alle content, als content id overeenkomt met de aangeklikte reis => extra info laten zien
 //extra info axios.get("/reizen/id")
@@ -29,16 +29,17 @@ setReis(content[i])
 
 
 
-})
+},[])
 
+console.log(reis)
 
-///nog gegevens van mongodb in de page zetten
+///nog gegevens van mongodb in de page zetten.....fetchen ok
 
 function handleFetch(){
     console.log("klik")
     fetch("http://localhost:5001/reizen")
-.then(res=>res.json(trip))
-  .then(trip=>  {console.log(trip)} )
+.then(res=>res.json())
+  .then(trip=>  {console.log(trip[0].title)} )
 }
 
   return (
@@ -62,6 +63,8 @@ function handleFetch(){
         deelnemer 2
     </li>
 </ul>
+
+ per beschikbare datum inschrijfknop
 </Col> 
 
 

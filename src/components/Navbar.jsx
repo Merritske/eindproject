@@ -1,14 +1,18 @@
 import React, { useContext, useEffect,  useState } from 'react'
 import Login from './Login'
 import logo from "../images/logoVO.png"
-import { Container, Image, Col, Row, Navbar, Brand, Nav } from 'react-bootstrap';
-
+import { Container, Image, Col, Row, Navbar, Brand, Nav, Button } from 'react-bootstrap';
+import Time from '../components/TimeOFDay'
 import { Navigate } from 'react-router-dom';
 import { UserProvider } from '../Context';
+import ReisSchema from './ReisSchema';
 
-function NavbarComponent() {
+function NavbarComponent({handleChange, handleLogout}) {
+  const [state, content, loggedIn] = useContext(UserProvider)
+  function handleLogin(){
 
- 
+    window.location.pathname = "/login"
+  }
 
 
   return (
@@ -41,10 +45,26 @@ function NavbarComponent() {
     
  
 
+<Row className='mt-5' id="navdos">
 
+
+  <Col >
+
+         { loggedIn ?   <button variant="primary" type='button' onClick={()=>{handleLogout()}} className="m-3">Logout</button> :
+         <Button className="btn btn-outline-dark border border-5 btn-danger fs-5" type="button" onClick={()=>{handleLogin()}}>
+              LOG IN  </Button>
+   }
+    
+        
+   
+  </Col>
+  <Col className='p-3' >
+  <ReisSchema/>
+  </Col>
+</Row>
       
 
-
+   <h1 ><Time /></h1>
 
 </Container>
 

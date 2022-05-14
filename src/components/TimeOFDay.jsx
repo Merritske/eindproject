@@ -1,7 +1,9 @@
 import { Container } from "react-bootstrap"
+import { UserProvider } from '../Context';
+import { useContext} from "react"
 
 function Time(){
-
+    const [state, content, loggedIn] = useContext(UserProvider)
 
 
     const hours = new Date().getHours()
@@ -17,7 +19,7 @@ function Time(){
     }
     return(
         <Container className="mt-5"> 
-            <h2>Goede {timeOfDay}!</h2>
+            <h2>Goede {timeOfDay}  {state.username}!</h2>
         </Container>
     )
 }

@@ -41,6 +41,7 @@ useEffect(()=>{
      setLoggedIn(true)
     }else  {
     console.log("not logged in")
+    setLoggedIn(false)
       } 
       //firebase foto's
       const getContent = async ()=>{
@@ -66,16 +67,17 @@ const handleLogin = ()=> {
        return   alert("deze username is niet gevonden, creëer een account")
         }else if(res.data.message === "user or password is not correct"){
       return    alert ("user or password is not correct")
-        }else{
-           return   localStorage.setItem('user', JSON.stringify({
+        }else{  setLoggedIn(true) 
+        localStorage.setItem('user', JSON.stringify({
           username: state.username,
           password: res.data.token
         }))
+        window.location = ("/")
         }
  
     
       })
-     
+  
   }
   console.log(state.username)
   const handleChange = e => {
@@ -84,10 +86,14 @@ const handleLogin = ()=> {
    console.log(e.target)
     setState({ ...state, [name]: value });
   }
-  
+  function handleLogout(){
+    localStorage.clear();
+    window.location.pathname = "/"
+    setLoggedIn(false)
+    }
   //inschrijven in een reis
 
-
+console.log(loggedIn)
 
   //https://v5.reactrouter.com/web/example/url-params
 
@@ -95,20 +101,21 @@ const handleLogin = ()=> {
   return (
     <div className="App">
 
-<UserProvider.Provider value={[state, content ]} >
+<UserProvider.Provider value={[state, content, loggedIn ]} >
 <BrowserRouter >
  <NavbarComponent   />
 
 <Routes>
 
-    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} loggedIn={loggedIn} />}/>
+    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
   <Route path='/register' element={  <Register handleLogin={handleLogin} /> }/>
 
    <Route path={`/reizen/:trip`} element={
       // <ProtectedRoute userInlog={state} />
       <Reizen  />
  } />
-<Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} />} />
+<Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} handleLogout={handleLogout}
+/>} />
 
 
 

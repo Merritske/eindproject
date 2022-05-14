@@ -21,6 +21,7 @@ import { collection, doc, getDocs } from "firebase/firestore"
 
 function App() {
 
+  const [loggedIn, setLoggedIn] = useState(false)
   const [state, setState] = useState({
     username:"",
     password:""
@@ -32,10 +33,12 @@ const reizen = collection(db, "reizen")
 useEffect(()=>{
     let user =  JSON.parse(localStorage.getItem("user")) 
      console.log(user)
-  if(user !== null && user !== ""){
+  if(user !== null && user !== "" && user.password !== "" && user.password !== null){
     setState({...state,
-      username: user.username
+      username: user.username,
+      password: user.password
      })
+     setLoggedIn(true)
     }else  {
     console.log("not logged in")
       } 
@@ -53,18 +56,26 @@ useEffect(()=>{
 
 
 const handleLogin = ()=> {
-
-    axios.post("/login", {
+    axios.post("http://localhost:5001/login", {
       username: state.username,
       password: state.password
     })
       .then(res => {
-        console.log(res.data)
-        localStorage.setItem('user', JSON.stringify({
+           console.log(res.data.message)
+        if(res.data.message === "user not found"){
+       return   alert("deze username is niet gevonden, creëer een account")
+        }else if(res.data.message === "user or password is not correct"){
+      return    alert ("user or password is not correct")
+        }else{
+           return   localStorage.setItem('user', JSON.stringify({
           username: state.username,
-          token: res.data.token
+          password: res.data.token
         }))
+        }
+ 
+    
       })
+     
   }
   console.log(state.username)
   const handleChange = e => {
@@ -72,9 +83,9 @@ const handleLogin = ()=> {
     const { name, value } = e.target;
    console.log(e.target)
     setState({ ...state, [name]: value });
-  
   }
   
+  //inschrijven in een reis
 
 
 
@@ -90,7 +101,7 @@ const handleLogin = ()=> {
 
 <Routes>
 
-    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin}/>}/>
+    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} loggedIn={loggedIn} />}/>
   <Route path='/register' element={  <Register handleLogin={handleLogin} /> }/>
 
    <Route path={`/reizen/:trip`} element={

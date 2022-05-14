@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Container, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { UserProvider } from '../Context';
 
 
-export default function Login({handleChange , handleLogin }) {
+export default function Login({handleChange , handleLogin, loggedIn }) {
 
- 
+ //!!!!!username en password moeten kloppen voordat naar de homepage vewezen mag worden met LOGOUT
+const [state, content] = useContext(UserProvider)
 
+console.log("loggedIn"+loggedIn)
 
   return (
     <Container fluid className="mt-5" >
@@ -25,9 +28,13 @@ export default function Login({handleChange , handleLogin }) {
 
               <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
             </Form.Group>
-        <button variant="primary" type='button' onClick={handleLogin}  className="m-3">
-        <Link to="/" > Submit </Link>
-          </button>
+        
+          {
+            loggedIn?   <button variant="primary" type='button' onClick={handleLogin}  className="m-3" href="/">   Submit      </button>
+             : <button variant="primary" type='button' onClick={handleLogin}  className="m-3" href="/login">  Submit      </button>
+          }
+   
+     
           
           </Form>
         

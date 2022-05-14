@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Form, Button, Container, Col, Row} from "react-bootstrap"
+import { Navigate } from 'react-router-dom'
 
 
 function Register({handleLogin}) {
@@ -31,7 +32,7 @@ console.log(state)
         body: JSON.stringify(state)
     }
     )
-    .then(res=>{res.json()
+    .then(res=>{res.json();
   console.log(res)    })
 
     }
@@ -125,8 +126,8 @@ onChange={handleChange}
 
 
 
-  <Button variant="primary" type="submit" onClick={()=>{
-    handleSubmit() ; handleLogin()
+  <Button variant="primary" type="submit" href="/login" onClick={()=>{ handleLogin();
+    handleSubmit() ; 
   } }>
     Creëer account
   </Button>

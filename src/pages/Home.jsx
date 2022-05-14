@@ -24,7 +24,7 @@ function handleLogin(){
   window.location.pathname = "/login"
 }
 useEffect(()=>{
-if(state.username !== ''){
+if(state.username !== '' && state.password !== ""){
 setUserInlog(true)
 }
 else{

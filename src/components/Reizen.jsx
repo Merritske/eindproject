@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useContext, useEffect, useState} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -25,9 +26,20 @@ for(let i =0; i< content.length ;i++){
 setReis(content[i])
     }
 }
+
+
+
 })
 
 
+///nog gegevens van mongodb in de page zetten
+
+function handleFetch(){
+    console.log("klik")
+    fetch("http://localhost:5001/reizen")
+.then(res=>res.json(trip))
+  .then(trip=>  {console.log(trip)} )
+}
 
   return (
  <Container className='mt-5'>
@@ -53,6 +65,7 @@ setReis(content[i])
 </Col> 
 
 
+<button onClick={handleFetch}>Click</button>
 <Inschrijven/>
      </Row>
 

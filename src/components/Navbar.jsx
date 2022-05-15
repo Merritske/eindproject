@@ -45,20 +45,20 @@ function NavbarComponent({handleChange, handleLogout}) {
     
  
 
-<Row className='mt-5' id="navdos">
+<Row className='mt-5 bg-secondary' id="navdos">
 
 
   <Col >
 
-         { loggedIn ?   <button variant="primary" type='button' onClick={()=>{handleLogout()}} className="m-3">Logout</button> :
-         <Button className="btn btn-outline-dark border border-5 btn-danger fs-5" type="button" onClick={()=>{handleLogin()}}>
+         { loggedIn ?   <button variant="primary" type='button' onClick={()=>{handleLogout()}} className="m-3 btn btn-outline-dark border border-5 btn-light ">Logout</button> :
+         <Button className="btn btn-outline-dark border border-5 btn-danger fs-5 m-3" type="button" onClick={()=>{handleLogin()}}>
               LOG IN  </Button>
    }
     
         
    
   </Col>
-  <Col className='p-3' >
+  <Col className='p-3'  >
   <ReisSchema/>
   </Col>
 </Row>

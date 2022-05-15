@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import { UserProvider } from '../context';
-import Home from '../pages/Home';
-import Inschrijven from '../pages/Inschrijven';
+
+
 
 function Reizen() {
     let { trip } = useParams()
@@ -27,22 +27,12 @@ function Reizen() {
                 setReis(content[i])
             }
         }
-
-
         console.log(reis)
-
-
-
-
-
-
-
     })
 
 
 
-    ///nog gegevens van mongodb in de page zetten.....fetchen ok
-
+//reizen fetchen
     function handleFetch() {
         console.log("klik")
         fetch("/reizen")
@@ -55,19 +45,23 @@ function Reizen() {
 
                 }
 
-console.log(geplandR)
+
             }) 
          
     }
-//     let days = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"]
-//     let maand = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"]
-//  const d = geplandR[0].date
-  
-//     console.log(d)
 
+console.log(geplandR)
 
-
-
+//opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
+//dus PUT "/reizen"
+// en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
+ function handleInschrijven (){
+axios.put("/reizen", (req, res)=>{
+    console.log (res)
+})
+ }
+ 
+ 
     return (
         <Container className='mt-5'>
 
@@ -84,9 +78,13 @@ console.log(geplandR)
                     <button onClick={handleFetch}>Bekijk de beschikbare datums</button>
  {
     geplandR.map((date, index)=>(
+
         <ul key={index}>
         <li>
-           {date.datum}
+    
+{
+    new Date(date.datum).toLocaleDateString("nl-BE", { weekday: "long", year: "numeric", month: "long", day: "numeric"})
+}
            {
                date.deelnemers.map((deeln, ind)=>(
 
@@ -103,7 +101,8 @@ console.log(geplandR)
       
 
        </li> 
-     <Inschrijven />
+       <Button className='m-3' onClick={handleInschrijven}>Inschrijven</Button>
+
 </ul>
     ))
 } 

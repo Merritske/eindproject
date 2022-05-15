@@ -1,6 +1,8 @@
 import React from 'react'
 import {Button } from "react-bootstrap"
 
+//mag weg???
+
 function Inschrijven() {
 
     function handleClick(){

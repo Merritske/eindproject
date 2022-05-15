@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap"
-import { UserProvider } from '../Context';
+import { UserProvider } from '../context';
 import { useContext} from "react"
 
 function Time(){

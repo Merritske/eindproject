@@ -4,7 +4,7 @@ import logo from "../images/logoVO.png"
 import { Container, Image, Col, Row, Navbar, Brand, Nav, Button } from 'react-bootstrap';
 import Time from '../components/TimeOFDay'
 import { Navigate } from 'react-router-dom';
-import { UserProvider } from '../Context';
+import { UserProvider } from '../context';
 import ReisSchema from './ReisSchema';
 
 function NavbarComponent({handleChange, handleLogout}) {

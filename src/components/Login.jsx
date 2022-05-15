@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Container, Form, Modal } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom';
-import { UserProvider } from '../Context';
+import { UserProvider } from '../context';
 import Home from '../pages/Home';
 
 

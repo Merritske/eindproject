@@ -9,7 +9,7 @@ import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import Reizen from './components/Reizen';
 import ProtectedRoute from './components/ProtectedRoute';
-import { FotoProvider, UserProvider } from './Context';
+import { FotoProvider, UserProvider } from './context';
 import { db} from './firebase'
 import { collection, doc, getDocs } from "firebase/firestore"
 
@@ -21,6 +21,7 @@ import { collection, doc, getDocs } from "firebase/firestore"
 
 function App() {
 
+  
   const [loggedIn, setLoggedIn] = useState(false)
   const [state, setState] = useState({
     username:"",

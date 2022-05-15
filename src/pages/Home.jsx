@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Container, Nav, Button } from 'react-bootstrap'
 
 import Cards from '../components/Cards'
-import { UserProvider } from '../Context'
+import { UserProvider } from '../context'
 import { Link } from 'react-router-dom'
 
 

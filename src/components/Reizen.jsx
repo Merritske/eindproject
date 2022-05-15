@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-import { UserProvider } from '../Context';
+import { UserProvider } from '../context';
 import Home from '../pages/Home';
 import Inschrijven from '../pages/Inschrijven';
 

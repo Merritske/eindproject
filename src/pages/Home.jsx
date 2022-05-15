@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Container, Nav, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 import Cards from '../components/Cards'
 import { UserProvider } from '../context'
-import { Link } from 'react-router-dom'
+
 
 
 
@@ -12,20 +12,7 @@ function Home() {
 
 
 const [state, content, loggedIn] = useContext(UserProvider)
-// const [userInlog, setUserInlog]= useState(loggedIn.value);
-// console.log(userInlog)
-// console.log(loggedIn)
- 
 
-// useEffect(()=>{
-// if(state.username !== '' && state.password !== ""){
-// setUserInlog(true)
-// }
-// else{
-//   setUserInlog(false)
-// }
-
-// },[state])
 
   return (
     <Container fluid className=' mx-auto p-5 mt-5 '>

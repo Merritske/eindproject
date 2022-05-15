@@ -8,18 +8,20 @@ function Time(){
 
     const hours = new Date().getHours()
     let timeOfDay
-    if(hours <12){
+    if(hours <11){
         timeOfDay = "morgen"
-    }else if(hours >= 12 && hours < 17){
+    }else if(hours >= 11 && hours < 13){
         timeOfDay = "middag"
-    }else if(hours>=17 && hours < 20){
+    }else if(hours >= 13 && hours < 16){
+    timeOfDay = "namiddag"
+}else if(hours>=16 && hours < 21){
         timeOfDay = "avond"
     }else{
         timeOfDay = "nacht"
     }
     return(
         <Container className="mt-5"> 
-            <h2>Goede {timeOfDay}  {state.username}!</h2>
+            <h2>Goede {timeOfDay},  {state.username}!</h2>
         </Container>
     )
 }

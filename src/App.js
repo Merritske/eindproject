@@ -58,7 +58,7 @@ useEffect(()=>{
 
 
 const handleLogin = ()=> {
-    axios.post("http://localhost:5001/login", {
+    axios.post("/login", {
       username: state.username,
       password: state.password
     })
@@ -104,7 +104,7 @@ console.log(loggedIn)
 
 <UserProvider.Provider value={[state, content, loggedIn ]} >
 <BrowserRouter >
- <NavbarComponent   />
+ <NavbarComponent handleChange={handleChange} handleLogout={handleLogout}  />
 
 <Routes>
 

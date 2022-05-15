@@ -45,7 +45,7 @@ function Reizen() {
 
     function handleFetch() {
         console.log("klik")
-        fetch("http://localhost:5001/reizen")
+        fetch("/reizen")
             .then(res => res.json())
             .then(trip => {
                 for (let y = 0; y < trip.length; y++) {

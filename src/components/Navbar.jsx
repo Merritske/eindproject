@@ -50,7 +50,7 @@ function NavbarComponent({handleChange, handleLogout}) {
 
   <Col >
 
-         { loggedIn ?   <button variant="primary" type='button' onClick={()=>{handleLogout()}} className="m-3 btn btn-outline-dark border border-5 btn-light ">Logout</button> :
+         { loggedIn ?   <button variant="primary" type='button' onClick={handleLogout} className="m-3 btn btn-outline-dark border border-5 btn-light ">Logout</button> :
          <Button className="btn btn-outline-dark border border-5 btn-danger fs-5 m-3" type="button" onClick={()=>{handleLogin()}}>
               LOG IN  </Button>
    }

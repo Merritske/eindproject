@@ -14,6 +14,7 @@ import { db} from './firebase'
 import { collection, doc, getDocs } from "firebase/firestore"
 
 
+
 //use context of redux
 // fetch("/login")
 // fetch("/register")

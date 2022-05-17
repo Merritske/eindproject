@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useContext } from 'react'
 import {Button } from "react-bootstrap"
 
@@ -6,7 +7,10 @@ import {Button } from "react-bootstrap"
 function Profiel() {
 const [state, content, loggedIn] = useContext()
     function handleClick(){
-        console.log("Going on a trip?")
+        console.log("profiel update")
+        axios.put("/profiel")
+        .then(res=>res.json())
+        .then((data)=>{console.log(data)})
     }
   return (
     <div>
@@ -53,8 +57,8 @@ const [state, content, loggedIn] = useContext()
        </li>
      
      </ul>
-Inschrijvingsformulier
-<Button className='m-3' onClick={handleClick}>Inschrijven</Button>
+
+<Button className='m-3' onClick={handleClick}>Update profiel</Button>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Button, Container, Form, Modal } from 'react-bootstrap'
 import { Link, Navigate } from 'react-router-dom';
 import { UserProvider } from '../context';
 import Home from '../pages/Home';
+import Profiel from '../pages/Profiel';
 
 
 
@@ -34,7 +35,7 @@ console.log("loggedIn"+loggedIn)
   
    
      
-          
+     
           </Form>
         
           <h3>No account? <Link to="/register" >Create an account</Link>

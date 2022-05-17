@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Container, Card, CardGroup, Fade, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FotoProvider, UserProvider } from '../context'
-import Inschrijven from '../pages/Inschrijven'
+import Inschrijven from '../pages/Profiel'
 
 
 

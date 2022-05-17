@@ -112,9 +112,9 @@ console.log(loggedIn)
     <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
   <Route path='/register' element={  <Register handleLogin={handleLogin} /> }/>
 
-   <Route path={`/reizen/:trip`} element={
-      // <ProtectedRoute userInlog={state} />
-      <Reizen  />
+   <Route path={`/reizen/:trip`} element={ <Reizen  />} />
+ <Route path="/profiel" element={
+   <ProtectedRoute userInlog={state} />
  } />
 <Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} handleLogout={handleLogout}
 />} />

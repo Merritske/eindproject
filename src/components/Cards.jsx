@@ -9,7 +9,7 @@ import Inschrijven from '../pages/Profiel'
 
 
 function Cards() {
-  const [state, content] = useContext(UserProvider)
+  const [state, content, loggedIn] = useContext(UserProvider)
   const [flipped, setFlipped] = useState(true)
 
   console.log(content)

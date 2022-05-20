@@ -1,8 +1,8 @@
 import GoogleMapReact from 'google-map-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Container, Card, CardGroup, Fade, Row, Col, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { FotoProvider, UserProvider } from '../context'
+
+import {  UserProvider } from '../context'
 import Inschrijven from '../pages/Profiel'
 
 
@@ -10,38 +10,44 @@ import Inschrijven from '../pages/Profiel'
 
 function Cards() {
   const [state, content, loggedIn] = useContext(UserProvider)
-  const [flipped, setFlipped] = useState(true)
-
-  console.log(content)
-
+const [flipped, setFlipped] = useState(false)
 
   let tekstCard = document.getElementsByClassName("back")
   let footer = document.querySelectorAll("#cardTitle")
-  console.log(footer)
+  let card = document.querySelectorAll("#cardInner")
+
+
   function handleMouseEnter(e) {
-    setFlipped(true)
+    for(let i=0;i<card.length; i++){  
+  if(e.target.parentNode === card[i] ){
+       var target = e.target.parentNode
+     }
+    }
     e.preventDefault()
-   
-    console.log(e.target.lastChild.lastChild.firstChild.innerText)
+   setFlipped(true)
     for (let x = 0; x < content.length; x++) {
- console.log(content[x].title)
-      if (content[x].title === e.target.lastChild.lastChild.firstChild.innerText) {
+      console.log()
+ //console.log(content[x].title)
+      if (content[x].title === target.lastChild.firstChild.innerText) {
       //  console.log(footer[x]) GEEFT UNDEFINED
-
-
-      //  footer[x].style.transform = "rotateY(180deg)!important"
+console.log(footer);
+console.log(content[x].tekst)
+tekstCard[x].innerText = content[x].tekst
+footer[x].style.transform = "rotateY(180deg)"
+//btnInfo.appendChild(visible)
+// btnInfo[x].style.visibility = "visible"
       }
     }
   }
   function handleMouseLeave(e) {
+    setFlipped(false)
     for (let x = 0; x < content.length; x++) {
-     // footer[x].style.transform = "rotateY(0deg)"
-
-      setFlipped(false)
+      footer[x].style.transform = "rotateY(0deg)"
+      tekstCard[x].innerText = ""
 
     }
   }
-  console.log(flipped)
+ // console.log(flipped)
   //bij flip nog aanpassen dat dan de tekst goed getoond wordt en de naam blijft staan
   //knop om aan te melden voor de reis => login vereist
   //meer info
@@ -56,20 +62,20 @@ function Cards() {
         {
           content.map((data, index) => {
             return (
-              <Col  className=' h-25 mt-4' key={index} onClick={() => console.log(index)} onMouseOver={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
+              <Col  className=' h-25 mt-4' key={index} onClick={() => console.log(index)}  >
 
-                <Card id="card" className=" text-white mx-auto mt-3  h-50 "    >
-<Container id="cardInner" >
-
-
-                  <Card.Img id="cardImg" src={data.foto} alt={data.title} />
+                <Card id="card" className=" text-white mx-auto mt-3  h-50 "   >
+<Container id="cardInner" onMouseOver={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
 
 
+                  <Card.Img id="cardImg" src={data.foto} alt={data.title}  />
 
-               <Card.ImgOverlay  >
+
+
+         <Card.ImgOverlay  >
 
                     <Card.Text className='back'>
-                      {data.tekst}
+                 
                     </Card.Text>
 
 
@@ -81,10 +87,10 @@ function Cards() {
                   <Container className='bg-dark' id="footer">
                     <Card.Title id="cardTitle" className='mt-3 fs-3 text-white'>{data.title}</Card.Title>
 {
-  state.username != "" ? 
+  loggedIn ? 
   
-  <Button className='m-3' href={`/reizen/${data.title}`}>   INFO  </Button> :
-  <Button className='m-3' href={"/login"} onClick={()=>{ alert("log in of creëer een account om meer info over deze trip te bekijken")}}  >   INFO  </Button> 
+flipped?  <Button id="btnInfo" className='m-3' href={`/reizen/${data.title}`}>  INFO </Button> :"" :
+  <Button className='m-3' href={"/login"} onClick={()=>{ alert("log in of creëer een account om meer info over deze trip te bekijken")}}  >   Log in   </Button> 
 
 }
                

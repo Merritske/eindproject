@@ -30,13 +30,10 @@ background-color: black;
 #card:hover #cardInner{
       transform: rotateY(180deg);
 }
-#cardImg, .back{
+#cardImg{
 
   backface-visibility: hidden;
   width: 100%;
-}
-
-#cardImg  {
 background-color: black;
 padding: 0;
 margin: 0;
@@ -45,7 +42,6 @@ object-position: center;
 object-fit: cover;
 } 
 .back{
-
 height: 300px;
   margin-left: auto;
   margin-right: auto;
@@ -62,15 +58,15 @@ height: 300px;
 }    
 #footer{
   position: absolute;
-
   width: 100%;
 }
  #cardTitle{
-
 width: inherit;
 text-align: center;
 } 
-
+#btnInfo{
+  transform: rotateY(180deg);
+}
 
 .modal-content{
   width: 800px;

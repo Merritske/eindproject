@@ -17,25 +17,27 @@ function Reizen() {
     //extra info = datums, uitleg over de reis, inschrijvingen deelnemers
     //uit mongoDB halen
 
-    console.log(trip)
+
     const [reis, setReis] = useState([])
     const [geplandR, setGeplandR] = useState([])
 
     useEffect(() => {
+           
         for (let i = 0; i < content.length; i++) {
-            if (content[i].id === trip) {
+             console.log(trip)
+            if (content[i].title === trip) {
                 setReis(content[i])
             }
         }
         console.log(reis)
     })
-
-
+//soms begint die data te laden en soms niet, als je []depency arry er zet stopt die maar dan verschijnt de data niet op het scherm
+//WAAROM WERKT DIT DE ENE KEER WEL EN DE ANDERE KEER NIET?????????
 
 //reizen fetchen
     function handleFetch() {
         console.log("klik")
-        fetch("/reizen")
+        fetch("http://localhost:5001/reizen")
             .then(res => res.json())
             .then(trip => {
                 for (let y = 0; y < trip.length; y++) {
@@ -50,49 +52,54 @@ function Reizen() {
          
     }
 
-console.log(geplandR)
-const [deelnemers, setDeelnemers] = useState()
-//opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
-//dus PUT "/reizen"
-// en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
+// console.log(geplandR)
+ const [deelnemers, setDeelnemers] = useState([])
+// //opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
+// //dus PUT "/reizen"
+// // en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
  function handleInschrijven (e){
-     //VOORBEELD
-    // const requestOptions = {
-    //     method: 'PUT',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ title: 'React Hooks PUT Request Example' })
-    // };
-    // fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
-    //     .then(response => response.json())
-    //     .then(data => setPostId(data.id));
-//      console.log(e.target.id)
-const deelnemer = user.username
-const requestOptions = {
-        method: 'PUT',
-    headers:{
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({deelnemers: deelnemer}) 
-};
-
-console.log(user.username)
+//      //VOORBEELD
+//     // const requestOptions = {
+//     //     method: 'PUT',
+//     //     headers: { 'Content-Type': 'application/json' },
+//     //     body: JSON.stringify({ title: 'React Hooks PUT Request Example' })
+//     // };
+//     // fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+//     //     .then(response => response.json())
+//     //     .then(data => setPostId(data.id));
+// //      console.log(e.target.id)
+ const deelnemer = user.username
+// const requestOptions = {
+//         method: 'PUT',
+//      headers:{
+//          'Content-Type': 'application/json'
+//     },
+//      body: JSON.stringify({deelnemers: deelnemer})
+//  };
+ console.log("going on a trip?!")
+console.log(trip)
      console.log(geplandR[e.target.id].deelnemers)
-fetch(`/reizen/${trip}`, requestOptions)
+ fetch(`/reizen/${trip}`
+ //,requestOptions
+ )
+ .then(res=>  res.json())
+ .then((data)=>{
+     data.map((reis)=>{
+         if(reis.title === trip){
+             console.log(reis.gepland[e.target.id].deelnemers)
+                 setDeelnemers([
+                    ...geplandR[e.target.id].deelnemers,
+                    deelnemer
+                 ])
+         }
+     })
 
-.then(res=>  res.json())
-.then((data)=>{
-    setDeelnemers(data)
-//  [ ...geplandR[e.target.id].deelnemers], user.username
-}
+ }
       
 
-)
-  
-
-
-console.log("going on a trip?!")
- }
- 
+ )
+  }
+ console.log(deelnemers)
  
     return (
         <Container className='mt-5'>
@@ -101,7 +108,7 @@ console.log("going on a trip?!")
 
             <Row className='mt-5'  >
 
-                <h1 className='mt-5'>{reis.id}</h1>
+                <h1 className='mt-5'>{reis.title}</h1>
                 <Col>
                     <p>{reis.tekst}</p>
                 </Col>

@@ -15,7 +15,7 @@ const [state, content, loggedIn] = useContext(UserProvider)
 
 
   return (
-    <Container fluid className=' mx-auto p-5 mt-5 '>
+    <Container fluid className=' mx-auto p-5  '>
 
 
    

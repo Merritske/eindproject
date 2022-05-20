@@ -52,13 +52,15 @@ function Cards() {
   return (
     <Container fluid  >
 
-      <Row md={1} lg={2} xl={3} >
+      <Row md={1} lg={2} xl={3} xs={1} >
         {
           content.map((data, index) => {
             return (
-              <Col className=' h-25' key={index} onClick={() => console.log(index)} onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
+              <Col  className=' h-25 mt-4' key={index} onClick={() => console.log(index)} onMouseOver={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
 
-                <Card id="card" className="bg-dark text-white mx-auto mt-3  h-50 "    >
+                <Card id="card" className=" text-white mx-auto mt-3  h-50 "    >
+<Container id="cardInner" >
+
 
                   <Card.Img id="cardImg" src={data.foto} alt={data.title} />
 
@@ -76,8 +78,8 @@ function Cards() {
            
 
 
-                  <div className='bg-dark' id="footer">
-                    <Card.Title id="cardTitle" className='mt-3 fs-2 text-white'>{data.title}</Card.Title>
+                  <Container className='bg-dark' id="footer">
+                    <Card.Title id="cardTitle" className='mt-3 fs-3 text-white'>{data.title}</Card.Title>
 {
   state.username != "" ? 
   
@@ -87,12 +89,9 @@ function Cards() {
 }
                
                    
+                  </Container>
 
-                  
-
-                  </div>
-
-
+</Container>
                 </Card>
 
 

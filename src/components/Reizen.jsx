@@ -51,14 +51,46 @@ function Reizen() {
     }
 
 console.log(geplandR)
-
+const [deelnemers, setDeelnemers] = useState()
 //opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
 //dus PUT "/reizen"
 // en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
- function handleInschrijven (){
-axios.put("/reizen", (req, res)=>{
-    console.log (res)
-})
+ function handleInschrijven (e){
+     //VOORBEELD
+    // const requestOptions = {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ title: 'React Hooks PUT Request Example' })
+    // };
+    // fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+    //     .then(response => response.json())
+    //     .then(data => setPostId(data.id));
+//      console.log(e.target.id)
+const deelnemer = user.username
+const requestOptions = {
+        method: 'PUT',
+    headers:{
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({deelnemers: deelnemer}) 
+};
+
+console.log(user.username)
+     console.log(geplandR[e.target.id].deelnemers)
+fetch(`/reizen/${trip}`, requestOptions)
+
+.then(res=>  res.json())
+.then((data)=>{
+    setDeelnemers(data)
+//  [ ...geplandR[e.target.id].deelnemers], user.username
+}
+      
+
+)
+  
+
+
+console.log("going on a trip?!")
  }
  
  
@@ -101,7 +133,7 @@ axios.put("/reizen", (req, res)=>{
       
 
        </li> 
-       <Button className='m-3' onClick={handleInschrijven}>Inschrijven</Button>
+       <Button id={index} className='m-3' onClick={handleInschrijven}>Inschrijven</Button>
 
 </ul>
     ))

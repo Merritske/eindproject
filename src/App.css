@@ -12,50 +12,66 @@
 .text-pop-up-bottom:hover{animation:text-pop-up-bottom .8s cubic-bezier(.25,.46,.45,.94) both}
 @keyframes text-pop-up-bottom{0%{transform:translateY(0);transform-origin:50% 50%;text-shadow:none}100%{transform:translateY(20px);transform-origin:50% 50%;text-shadow:0 1px 0 #ccc,0 2px 0 #ccc,0 3px 0 #ccc,0 4px 0 #ccc,0 5px 0 #ccc,0 6px 0 #ccc,0 3px 0 #ccc,0 4px 0 #ccc,0 5px 0 #ccc,0 20px 10px rgba(0,0,0,.3)}}
 
-#card:not(.footer){
-    position: relative;
-height: 500px;
-  text-align: center;
+#card{
 
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+  perspective: 1000px;
+    background-color: transparent;
+    border: none !important;
 } 
-#card:hover{
-      height: 500px;
+#cardInner{ 
+  position: relative;
+height: 500px;
+padding: 0;
+   text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; 
+background-color: black;
+}
+#card:hover #cardInner{
       transform: rotateY(180deg);
 }
-.footer{
-  transform: rotateY(0deg) !important;
-}
-#cardImg  {
-  height: 300px;
-  object-position: center;
-object-fit: cover;
+#cardImg, .back{
+
   backface-visibility: hidden;
+  width: 100%;
+}
+
+#cardImg  {
+background-color: black;
+padding: 0;
+margin: 0;
+height: 80%;
+object-position: center;
+object-fit: cover;
 } 
 .back{
 
-
-width: 250px;
-  width: 300px;
+height: 300px;
   margin-left: auto;
   margin-right: auto;
+  transform: rotateY(180deg);
 } 
 
- .card-img-overlay{
+  .card-img-overlay{
   height: 300px !important;
   min-width: 250px;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
-transform: rotateY(180deg);
-}   
 
+}    
+#footer{
+  position: absolute;
+
+  width: 100%;
+}
  #cardTitle{
 
 width: inherit;
 text-align: center;
 } 
+
+
 .modal-content{
   width: 800px;
 }

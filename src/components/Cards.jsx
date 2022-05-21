@@ -89,8 +89,8 @@ footer[x].style.transform = "rotateY(180deg)"
 {
   loggedIn ? 
   
-flipped?  <Button id="btnInfo" className='m-3' href={`/reizen/${data.title}`}>  INFO </Button> :"" :
-  <Button className='m-3' href={"/login"} onClick={()=>{ alert("log in of creëer een account om meer info over deze trip te bekijken")}}  >   Log in   </Button> 
+flipped?  <Button id="btnInfo" className='m-3' href={`/reizen/${data.title}`}  >  INFO </Button> :"" :
+  <Button className='m-3' href={"/login"} onClick={()=>{ alert("log in of creëer een account om meer info over deze trip te bekijken")}}  >   INFO   </Button> 
 
 }
                

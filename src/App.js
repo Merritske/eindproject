@@ -53,7 +53,8 @@ useEffect(()=>{
         )
         ))  
       }
-      getContent()   
+      getContent()   ;
+      //fetch reizen
 },[])
 
 

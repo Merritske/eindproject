@@ -20,6 +20,8 @@ function Reizen() {
 
     const [reis, setReis] = useState([])
     const [geplandR, setGeplandR] = useState([])
+    const [deelnemers, setDeelnemers] = useState([])
+    const [datumId, setDatumId] = useState()
 
     useEffect(() => {
            
@@ -52,12 +54,18 @@ function Reizen() {
          
     }
 
-// console.log(geplandR)
- const [deelnemers, setDeelnemers] = useState([])
+//console.log(geplandR)
+    console.log(deelnemers)
 // //opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
 // //dus PUT "/reizen"
 // // en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
- function handleInschrijven (e){
+ function handleInschrijven (e){ 
+     const deelnemer = user.username
+    setDeelnemers(
+     [...geplandR[e.target.id].deelnemers, deelnemer]
+      )
+    
+        setDatumId(geplandR[e.target.id]._id)
 //      //VOORBEELD
 //     // const requestOptions = {
 //     //     method: 'PUT',
@@ -67,39 +75,39 @@ function Reizen() {
 //     // fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
 //     //     .then(response => response.json())
 //     //     .then(data => setPostId(data.id));
-// //      console.log(e.target.id)
- const deelnemer = user.username
-// const requestOptions = {
-//         method: 'PUT',
-//      headers:{
-//          'Content-Type': 'application/json'
-//     },
-//      body: JSON.stringify({deelnemers: deelnemer})
-//  };
+     console.log(e.target.id)
+
+const requestOptions = {
+        method: 'PUT',
+     headers:{
+         'Content-Type': 'application/json',
+         "Content-Length": "1500"
+    },
+     body: JSON.stringify( 
+    
+     {
+         _id: datumId,
+        deelnemers: deelnemers}
+  
+         )
+ };
  console.log("going on a trip?!")
 console.log(trip)
-     console.log(geplandR[e.target.id].deelnemers)
- fetch(`/reizen/${trip}`
- //,requestOptions
+console.log(deelnemer)
+
+ fetch(`http://localhost:5001/reizen/${trip}`
+ ,requestOptions
  )
  .then(res=>  res.json())
  .then((data)=>{
-     data.map((reis)=>{
-         if(reis.title === trip){
-             console.log(reis.gepland[e.target.id].deelnemers)
-                 setDeelnemers([
-                    ...geplandR[e.target.id].deelnemers,
-                    deelnemer
-                 ])
-         }
-     })
-
+  
+ console.log(data)
  }
       
 
  )
   }
- console.log(deelnemers)
+
  
     return (
         <Container className='mt-5'>

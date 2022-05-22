@@ -55,7 +55,7 @@ function Reizen() {
     }
 
 //console.log(geplandR)
-    console.log(deelnemers)
+
 // //opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
 // //dus PUT "/reizen"
 // // en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
@@ -66,22 +66,14 @@ function Reizen() {
       )
     
         setDatumId(geplandR[e.target.id]._id)
-//      //VOORBEELD
-//     // const requestOptions = {
-//     //     method: 'PUT',
-//     //     headers: { 'Content-Type': 'application/json' },
-//     //     body: JSON.stringify({ title: 'React Hooks PUT Request Example' })
-//     // };
-//     // fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
-//     //     .then(response => response.json())
-//     //     .then(data => setPostId(data.id));
-     console.log(e.target.id)
 
+     console.log(e.target.id)
+    console.log(deelnemers)
 const requestOptions = {
         method: 'PUT',
      headers:{
          'Content-Type': 'application/json',
-         "Content-Length": "1500"
+         "Content-Length": '1500'
     },
      body: JSON.stringify( 
     
@@ -92,8 +84,11 @@ const requestOptions = {
          )
  };
  console.log("going on a trip?!")
-console.log(trip)
-console.log(deelnemer)
+//PAS NA DE TWEEDE KEER KLIKKEN UPDATE DIE DE GEGEVENS??????
+//CONSOLE.LOG in backend laat de geupdate gegevens zien, zowel via insomnia als de gegevens via html ingegeven 
+//in insomnia geeft die melding van "cannot PUT"
+//in MongoDB gebeurt niets
+ console.log(requestOptions.body);
 
  fetch(`http://localhost:5001/reizen/${trip}`
  ,requestOptions
@@ -106,6 +101,7 @@ console.log(deelnemer)
       
 
  )
+
   }
 
  

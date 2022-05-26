@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Container } from 'react-bootstrap'
+import { UserProvider } from '../context'
+
 
 function ReisSchema() {
+  const [state, content, isLoggedIn] = useContext(UserProvider)
 const [reisSchema, setReisSchema] = useState([])
 
 //lijst met geplande reizen per user/// een profiel maken met alle gegevens van de user => protectedROUTE
@@ -20,11 +23,16 @@ const [reisSchema, setReisSchema] = useState([])
   //   }) 
   // })
 
-
+function getTrips(){
+  fetch("/reizen")
+  .then(res => res.json())
+  .then(trip => {trip.map((trip)=>{
+    console.log(trip)})})
+}
 
   return (
     <Container fluid className='d-flex '>
-       <h5 className='px-3'> ReisSchema </h5>
+       <h5 className='px-3' onClick={getTrips} > ReisSchema </h5>
     <img src="https://cdn2.vectorstock.com/i/1000x1000/41/51/suitcase-travel-icon-vector-3394151.jpg" style={{"height": 50}} />
 
 

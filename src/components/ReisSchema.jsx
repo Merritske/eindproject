@@ -24,16 +24,17 @@ const [reisSchema, setReisSchema] = useState([])
   // })
 
 function getTrips(){
+  console.log("klikie")
   fetch("/reizen")
   .then(res => res.json())
-  .then(trip => {trip.map((trip)=>{
+  .then((data) => {data.map((trip)=>{
     console.log(trip)})})
 }
 
   return (
-    <Container fluid className='d-flex '>
-       <h5 className='px-3' onClick={getTrips} > ReisSchema </h5>
-    <img src="https://cdn2.vectorstock.com/i/1000x1000/41/51/suitcase-travel-icon-vector-3394151.jpg" style={{"height": 50}} />
+    <Container fluid className='d-flex ' onClick={getTrips}>
+       <h5 className='px-3'  > uw reizen </h5>
+    <img src="https://cdn2.vectorstock.com/i/1000x1000/41/51/suitcase-travel-icon-vector-3394151.jpg" style={{"height": 50, "cursor":"pointer"}} />
 
 
     </Container>

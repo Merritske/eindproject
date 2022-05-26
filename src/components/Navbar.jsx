@@ -59,7 +59,7 @@ function NavbarComponent({handleChange, handleLogout}) {
    
   </Col>
   <Col className='p-3'  >
-  <ReisSchema/>
+  <ReisSchema />
   </Col>
 </Row>
       

@@ -64,7 +64,7 @@ function Cards() {
             return (
               <Col className=' h-25 mt-4' key={index} onClick={() => console.log(index)}  >
 
-                <Card id="card" className=" text-white mx-auto mt-3  h-50 "   >
+                <Card id="card" className=" text-white mx-auto mt-3  h-50 rounded-right "   >
                   <Container id="cardInner" onMouseOver={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
 
 

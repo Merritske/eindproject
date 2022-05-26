@@ -39,7 +39,7 @@ function Reizen() {
     //reizen fetchen
     function handleFetch() {
         console.log("klik")
-        fetch("/reizen/:trip")
+        fetch(`/reizen/${trip}`)
             .then(res => res.json())
             .then(trip => {
                 for (let y = 0; y < trip.length; y++) {

@@ -60,7 +60,7 @@ useEffect(()=>{
 
 
 const handleLogin = ()=> {
-    axios.post("/login", {
+    axios.get("/login", {
       username: state.username,
       password: state.password
     })

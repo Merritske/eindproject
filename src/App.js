@@ -70,7 +70,9 @@ const handleLogin = ()=> {
        return   alert("deze username is niet gevonden, creëer een account")
         }else if(res.data.message === "user or password is not correct"){
       return    alert ("user or password is not correct")
-        }else{  setLoggedIn(true) 
+        }else{  
+          setLoggedIn(true) 
+          console.log(res.data.token)
         localStorage.setItem('user', JSON.stringify({
           username: state.username,
           password: res.data.token

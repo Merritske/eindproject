@@ -24,7 +24,6 @@ function Reizen() {
     const [datumId, setDatumId] = useState()
 
     useEffect(() => {
-
         for (let i = 0; i < content.length; i++) {
             console.log(trip)
             if (content[i].title === trip) {
@@ -32,35 +31,42 @@ function Reizen() {
             }
         }
         console.log(reis)
+        reisM.map((uitstap) => {
+            console.log(uitstap)
+           
+                if (uitstap.title == reis.title) {
+                    setGeplandR(uitstap.gepland)
+                }
+    })
     })
     //soms begint die data te laden en soms niet, als je []depency arry er zet stopt die maar dan verschijnt de data niet op het scherm
     //WAAROM WERKT DIT DE ENE KEER WEL EN DE ANDERE KEER NIET?????????
 
     //reizen fetchen
-    function handleFetch() {
-        console.log("klik")
-        fetch(`/reizen/${trip}`)
-            .then(res => res.json())
-            .then(trip => {
-                for (let y = 0; y < trip.length; y++) {
-                    if (trip[y].title == reis.title) {
-                        setGeplandR(trip[y].gepland)
-                    }
+    //     function handleFetch() {
+    // console.log("klik")
+    //         fetch(`/reizen/${trip}`)
+    //             .then(res => res.json())        
+    //             .then(trip => {
+    //                 for (let y = 0; y < trip.length; y++) {
+    //                     if (trip[y].title == reis.title) {
+    //                         setGeplandR(trip[y].gepland)
+    //                     }
 
-                }
+    //                 }
 
 
-            })
+    //             })
 
-    }
+    //     }
 
-console.log(geplandR)
+    console.log(geplandR)
 
     // //opzoeken om reizen te updaten bij inschrijven + lijst van de deelnemer van geplande reizen aanpassen
     // //dus PUT "/reizen"
     // // en PUT "/user" PROFIEL VAN DE USER NOG MAKEN => hier ook wachtwoord en username veranderen en gegevens aanpassen, uitschrijven nieuwsbrief, uitschrijven website => protectedROUTE!!! 
     function handleInschrijven(e) {
-        
+
         const deelnemer = user.username
         setDeelnemers(
             [...geplandR[e.target.id].deelnemers, deelnemer]
@@ -78,8 +84,8 @@ console.log(geplandR)
         //in MongoDB gebeurt niets
 
 
-        fetch(`/reizen/${trip}` , 
-        {
+        fetch(`/reizen/${trip}`,
+            {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,19 +113,19 @@ console.log(geplandR)
 
 
             <Row className='mt-5'  >
-      <Col md={8} >
-                <h1 className='mt-5'>{reis.title}</h1>
-          
+                <Col md={8} >
+                    <h1 className='mt-5'>{reis.title}</h1>
+
                     <p>{reis.tekst}</p>
                 </Col>
                 <Col md={4} className=' mt-5'>
                     <h3> beschikbare datums om in te schrijven</h3>
-                    <button onClick={handleFetch}>Bekijk de beschikbare datums</button>
+       
                     {
                         geplandR.map((date, index) => (
 
-                            <ListGroup key={index}>
-                                <ListGroupItem>
+                            <ListGroup key={index}  >
+                                <ListGroupItem className="w-100 bg-secondary text-light rounded m-3">
 
                                     {
                                         new Date(date.datum).toLocaleDateString("nl-BE", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
@@ -127,7 +133,7 @@ console.log(geplandR)
                                     {
                                         date.deelnemers.map((deeln, ind) => (
 
-                                            <ListGroup key={ind} className="w-25 mx-auto">
+                                            <ListGroup key={ind} className="w-50 mx-auto">
                                                 <ListGroupItem className='m-1'>
                                                     {deeln}
                                                 </ListGroupItem>
@@ -138,9 +144,9 @@ console.log(geplandR)
                                         ))
                                     }
 
-
+ <Button id={index} className='m-3' onClick={handleInschrijven}>Inschrijven</Button>
                                 </ListGroupItem>
-                                <Button id={index} className='m-3' onClick={handleInschrijven}>Inschrijven</Button>
+                               
 
                             </ListGroup>
                         ))

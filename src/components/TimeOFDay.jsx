@@ -21,7 +21,7 @@ function Time(){
     }
     return(
         <Container className="mt-5"> 
-            <h2>Goede {timeOfDay},  {state.username}!</h2>
+            <h2>Goede {timeOfDay}{loggedIn? ",{state.username}": "" }!</h2>
         </Container>
     )
 }

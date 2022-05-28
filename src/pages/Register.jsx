@@ -3,7 +3,7 @@ import {Form, Button, Container, Col, Row} from "react-bootstrap"
 
 
 
-function Register({handleLogin}) {
+function Register() {
 const [state, setState] = useState({
   username: "",
   password:"",
@@ -126,7 +126,8 @@ onChange={handleChange}
 
 
 
-  <Button variant="primary" type="submit" href="/login" onClick={()=>{ handleLogin();
+  <Button variant="primary" type="submit" href="/login" onClick={()=>{ 
+    // handleLogin();
     handleSubmit() ; 
   } }>
     Creëer account

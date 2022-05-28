@@ -9,7 +9,7 @@ import { UserProvider } from '../context';
 
 function Reizen() {
     let { trip } = useParams()
-    const [user, content, loggedIn] = useContext(UserProvider)
+    const [user, content, loggedIn, reisM] = useContext(UserProvider)
 
     //loop over alle content, als content id overeenkomt met de aangeklikte reis => extra info laten zien
     //extra info axios.get("/reizen/id")

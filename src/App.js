@@ -31,7 +31,8 @@ function App() {
    //firebase fot's en reizen ophalen
 const [content, setContent] = useState([])
 const reizen = collection(db, "reizen")
-
+//MongoDB reizen
+const [reisM, setReisM] = useState([])
 useEffect(()=>{
     let user =  JSON.parse(localStorage.getItem("user")) 
      console.log(user)
@@ -54,13 +55,28 @@ useEffect(()=>{
         ))  
       }
       getContent()   ;
+
       //fetch reizen
+      const getReizen = async ()=>{
+        fetch("/reizen", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token")
+          }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+          setReisM(data)
+        })}
+        getReizen();
 },[])
 
-
+console.log(reisM)
 
 const handleLogin = ()=> {
-    axios.get("http://localhost:5001/login", {
+    axios.post("/login", {
       username: state.username,
       password: state.password
     })
@@ -104,7 +120,7 @@ console.log(loggedIn)
   return (
     <div className="App">
 
-<UserProvider.Provider value={[state, content, loggedIn ]} >
+<UserProvider.Provider value={[state, content, loggedIn, reisM ]} >
 <BrowserRouter >
  <NavbarComponent handleChange={handleChange} handleLogout={handleLogout}  />
 

@@ -41,11 +41,26 @@ useEffect(()=>{
       password: user.password
      })
      setLoggedIn(true)
-    }else if(user === null || user === "" || user === undefined){
+    }else  {
     console.log("not logged in")
     setLoggedIn(false)
-      } else{
-         axios.get("/login", {
+      } 
+      //firebase foto's
+      const getContent = async ()=>{
+        const data = await getDocs(reizen);
+        setContent(data.docs.map((doc)=>(
+            {...doc.data(), id: doc.id}
+        )
+        ))  
+      }
+      getContent()   ;
+      //fetch reizen
+},[])
+
+
+
+const handleLogin = ()=> {
+    axios.get("http://localhost:5001/login", {
       username: state.username,
       password: state.password
     })
@@ -66,24 +81,7 @@ useEffect(()=>{
         }
       })
 
-      }
-      //firebase foto's
-      const getContent = async ()=>{
-        const data = await getDocs(reizen);
-        setContent(data.docs.map((doc)=>(
-            {...doc.data(), id: doc.id}
-        )
-        ))  
-      }
-      getContent()   ;
-      //fetch reizen
-},[])
-
-
-
-// const handleLogin = ()=> {
-   
-//   }
+  }
   console.log(state.username)
   const handleChange = e => {
     e.preventDefault()
@@ -112,19 +110,13 @@ console.log(loggedIn)
 
 <Routes>
 
-    <Route path='/login' element={<Login handleChange={handleChange} 
-    // handleLogin={handleLogin} 
-    />}/>
-  <Route path='/register' element={  <Register 
-  // handleLogin={handleLogin} 
-  /> }/>
+    <Route path='/login' element={<Login handleChange={handleChange} handleLogin={handleLogin} />}/>
+  <Route path='/register' element={  <Register handleLogin={handleLogin} /> }/>
    <Route path={`/reizen/:trip`} element={ <Reizen  />} />
  <Route path="/profiel" element={
    <ProtectedRoute userInlog={state} />
  } />
-<Route path='/' element={<Home handleChange={handleChange} 
-// handleLogin={handleLogin} 
-handleLogout={handleLogout}
+<Route path='/' element={<Home handleChange={handleChange} handleLogin={handleLogin} handleLogout={handleLogout}
 />} />
 
 

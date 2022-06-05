@@ -10,41 +10,49 @@ import Inschrijven from '../pages/Profiel'
 
 function Cards() {
   const [state, content, loggedIn] = useContext(UserProvider)
-  const [flipped, setFlipped] = useState(false)
 
   let tekstCard = document.getElementsByClassName("back")
   let footer = document.querySelectorAll("#cardTitle")
   let card = document.querySelectorAll("#cardInner")
-
+  let btnInfo = document.querySelectorAll(".btnInfo")
 
   function handleMouseEnter(e) {
-    for (let i = 0; i < card.length; i++) {
-      if (e.target.parentNode === card[i]) {
-        var target = e.target.parentNode
-      }
-    }
-    e.preventDefault()
-    setFlipped(true)
+    console.log(e.target.id)
     for (let x = 0; x < content.length; x++) {
-      console.log()
-      //console.log(content[x].title)
-      if (content[x].title === target.lastChild.firstChild.innerText) {
-        //  console.log(footer[x]) GEEFT UNDEFINED
-        console.log(footer);
-        console.log(content[x].tekst)
-        tekstCard[x].innerText = content[x].tekst
-        footer[x].style.transform = "rotateY(180deg)"
-        //btnInfo.appendChild(visible)
-        // btnInfo[x].style.visibility = "visible"
+      if (e.target.id === "cardInner" ) {
+        console.log(e.target.lastChild.firstChild.innerText)
+        if (content[x].title === e.target.lastChild.firstChild.innerText) {
+          tekstCard[x].innerText = content[x].tekst
+          footer[x].style.transform = "rotateY(180deg)"
+          btnInfo[x].style.visibility = "visible"
+        }
+      } else if (e.target.id === "cardImg") {
+        console.log(e.target.parentNode.lastChild.firstChild.innerText)
+        if (content[x].title === e.target.parentNode.lastChild.firstChild.innerText) {
+          tekstCard[x].innerText = content[x].tekst
+          footer[x].style.transform = "rotateY(180deg)"
+          btnInfo[x].style.visibility = "visible"
+        }
+      }else if(e.target.id === "footer"){
+        if(content[x].title === e.target.lastChild.innerText){
+          tekstCard[x].innerText = content[x].tekst
+          footer[x].style.transform = "rotateY(180deg)"
+          btnInfo[x].style.visibility = "visible"
+        }
+      }else if(e.target.id ==="overlay"){
+        if(content[x].title ===  e.target.parentNode.lastChild.firstChild.innerText){
+          tekstCard[x].innerText = content[x].tekst
+          footer[x].style.transform = "rotateY(180deg)"
+          btnInfo[x].style.visibility = "visible"
+        }
       }
     }
   }
   function handleMouseLeave(e) {
-    setFlipped(false)
     for (let x = 0; x < content.length; x++) {
       footer[x].style.transform = "rotateY(0deg)"
       tekstCard[x].innerText = ""
-
+      btnInfo[x].style.visibility = "hidden"
     }
   }
   // console.log(flipped)
@@ -62,37 +70,37 @@ function Cards() {
         {
           content.map((data, index) => {
             return (
-              <Col className=' h-25 mt-4' key={index} onClick={() => console.log(index)}  >
+              <Col className=' h-25 mt-4' key={index} >
 
-                <Card id="card" className=" text-white mx-auto mt-3  h-50 rounded-right "   >
-                  <Container id="cardInner" onMouseOver={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)} >
+                <Card id="card" className=" text-white mx-auto mt-3  h-50 rounded-right "  >
+                  <Container id="cardInner" onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => handleMouseLeave(e)}  >
 
 
                     <Card.Img id="cardImg" src={data.foto} alt={data.title} />
 
 
 
-                    <Card.ImgOverlay  >
+                    <Card.ImgOverlay id='overlay' >
 
                       <Card.Text className='back'>
 
                       </Card.Text>
 
+                      {
+                        loggedIn ?
 
+                          <Button className='m-3 p-2 btnInfo' href={`/reizen/${data.title}`}  >  INFO </Button> :
+                          <Button className='m-3  btnInfo' href={"/login"} onClick={() => { alert("log in of creëer een account om meer info over deze trip te bekijken") }}  >   INFO   </Button>
+
+                      }
                     </Card.ImgOverlay>
 
 
 
 
-                    <Container className='bg-dark' id="footer">
-                      <Card.Title id="cardTitle" className='mt-3 fs-3 text-white'>{data.title}</Card.Title>
-                      {
-                        loggedIn ?
+                    <Container className='bg-dark h-25' id="footer">
+                      <Card.Title id="cardTitle" className='mt-5 fs-3 text-white'>{data.title}</Card.Title>
 
-                          flipped ? <Button id="btnInfo" className='m-3 p-2' href={`/reizen/${data.title}`}  >  INFO </Button> : "" :
-                          <Button className='m-3' href={"/login"} onClick={() => { alert("log in of creëer een account om meer info over deze trip te bekijken") }}  >   INFO   </Button>
-
-                      }
 
 
                     </Container>

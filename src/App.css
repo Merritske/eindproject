@@ -66,8 +66,9 @@ height: 300px;
 width: inherit;
 text-align: center;
 } 
-#btnInfo{
+.btnInfo{
   transform: rotateY(180deg);
+  visibility: hidden;
 }
 
 .modal-content{

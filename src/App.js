@@ -28,7 +28,7 @@ function App() {
     username:"",
     password:""
   })
-   //firebase fot's en reizen ophalen
+   //firebase foto's en reizen ophalen
 const [content, setContent] = useState([])
 const reizen = collection(db, "reizen")
 //MongoDB reizen
@@ -56,7 +56,7 @@ useEffect(()=>{
       }
       getContent()   ;
 
-      //fetch reizen
+      //fetch reizen in Mongo
       const getReizen = async ()=>{
         fetch("/reizen", {
           method: "GET",
@@ -71,12 +71,14 @@ useEffect(()=>{
           setReisM(data)
         })}
         getReizen();
+      
+    
 },[])
 
 console.log(reisM)
 
 const handleLogin = ()=> {
-    axios.post("/login", {
+    axios.get("/login", {
       username: state.username,
       password: state.password
     })
